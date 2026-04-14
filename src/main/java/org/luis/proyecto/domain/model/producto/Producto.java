@@ -1,4 +1,4 @@
-package org.luis.proyecto.producto.domain.model;
+package org.luis.proyecto.domain.model.producto;
 
 public class Producto {
     private Integer id;
@@ -9,4 +9,5 @@ public class Producto {
     private double precio;
     private int stock;
 }
+
 
