@@ -1,4 +1,4 @@
-package org.luis.proyecto.domain.model.tipodocumentoidentidad;
+package org.luis.proyecto.domain.model;
 
 public class TipoDocumentoIdentidad {
     private Integer id;

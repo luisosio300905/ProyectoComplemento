@@ -1,6 +1,6 @@
-package org.luis.proyecto.domain.repository.producto;
+package org.luis.proyecto.domain.repository;
 
-import org.luis.proyecto.domain.model.producto.Producto;
+import org.luis.proyecto.domain.model.Producto;
 
 import java.util.Optional;
 

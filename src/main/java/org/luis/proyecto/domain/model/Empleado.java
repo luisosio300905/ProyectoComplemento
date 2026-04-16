@@ -1,5 +1,4 @@
-package org.luis.proyecto.domain.model.empleado;
-import org.luis.proyecto.domain.model.tipodocumentoidentidad.TipoDocumentoIdentidad;
+package org.luis.proyecto.domain.model;
 
 import java.time.LocalDate;
 
