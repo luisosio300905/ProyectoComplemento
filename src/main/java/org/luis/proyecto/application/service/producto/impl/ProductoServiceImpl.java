@@ -1,32 +1,48 @@
 package org.luis.proyecto.application.service.producto.impl;
 
-import org.luis.proyecto.application.port.in.producto.ActualizarProductoPort;
-import org.luis.proyecto.application.port.in.producto.CrearProductoPort;
-import org.luis.proyecto.application.port.in.producto.EliminarProductoPort;
+import org.luis.proyecto.application.usecase.producto.ActualizarProductoUseCase;
+import org.luis.proyecto.application.usecase.producto.CrearProductoUseCase;
+import org.luis.proyecto.application.usecase.producto.EliminarProductoUseCase;
 import org.luis.proyecto.application.service.producto.ProductoService;
-import org.luis.proyecto.domain.model.Producto;
+import org.luis.proyecto.application.usecase.producto.ListaProductosUseCase;
+import org.luis.proyecto.infrastructure.mapper.ProductoMapper;
+import org.luis.proyecto.infrastructure.rest.request.ProductoRequest;
+import org.luis.proyecto.infrastructure.rest.response.ProductoResponse;
+
+import java.util.List;
 
 public class ProductoServiceImpl implements ProductoService {
-    private final CrearProductoPort crearProductoPort;
-    private final ActualizarProductoPort actualizarProductoPort;
-    private final EliminarProductoPort eliminarProductoPort;
+    private final CrearProductoUseCase crearProductoUseCase;
+    private final ActualizarProductoUseCase actualizarProductoUseCase;
+    private final EliminarProductoUseCase eliminarProductoUseCase;
+    private final ListaProductosUseCase listaProductosUseCase;
+    private final ProductoMapper productoMapper;
 
-    public ProductoServiceImpl(CrearProductoPort crearProductoPort, ActualizarProductoPort actualizarProductoPort, EliminarProductoPort eliminarProductoPort) {
-        this.crearProductoPort = crearProductoPort;
-        this.actualizarProductoPort = actualizarProductoPort;
-        this.eliminarProductoPort = eliminarProductoPort;
+    public ProductoServiceImpl(CrearProductoUseCase crearProductoUseCase, ActualizarProductoUseCase actualizarProductoUseCase, EliminarProductoUseCase eliminarProductoUseCase, ListaProductosUseCase listaProductosUseCase, ProductoMapper productoMapper) {
+        this.crearProductoUseCase = crearProductoUseCase;
+        this.actualizarProductoUseCase = actualizarProductoUseCase;
+        this.eliminarProductoUseCase = eliminarProductoUseCase;
+        this.listaProductosUseCase = listaProductosUseCase;
+        this.productoMapper = productoMapper;
     }
 
-    public void crear(Producto producto) {
-        crearProductoPort.crear(producto);
+    public ProductoResponse crear(ProductoRequest producto) {
+        return productoMapper.toProductoResponse(
+                crearProductoUseCase.crear(productoMapper.toProducto(producto)));
     }
 
-    public void actualizar(Integer id, Producto producto) {
-        actualizarProductoPort.actualizar(id, producto);
+    public ProductoResponse actualizar(Integer id, ProductoRequest producto) {
+        return productoMapper.toProductoResponse(
+                actualizarProductoUseCase.actualizar(id, productoMapper.toProducto(producto)));
     }
 
     @Override
     public void eliminar(Integer id) {
-        eliminarProductoPort.eliminar(id);
+        eliminarProductoUseCase.eliminar(id);
+    }
+
+    @Override
+    public List<ProductoResponse> obtenerTodos() {
+        return productoMapper.toProductoResponseList(listaProductosUseCase.obtenerTodos());
     }
 }

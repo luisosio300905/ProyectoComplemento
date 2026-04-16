@@ -21,6 +21,15 @@ public class Producto {
         this.stock = stock;
     }
 
+    public Producto(String nombre, String codigo, String descripcion, String categoria, BigDecimal precio, int stock) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.categoria = categoria;
+        this.precio = precio;
+        this.stock = stock;
+    }
+
     public Integer getId() {
         return id;
     }

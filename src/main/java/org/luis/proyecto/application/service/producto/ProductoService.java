@@ -1,9 +1,14 @@
 package org.luis.proyecto.application.service.producto;
 
 import org.luis.proyecto.domain.model.Producto;
+import org.luis.proyecto.infrastructure.rest.request.ProductoRequest;
+import org.luis.proyecto.infrastructure.rest.response.ProductoResponse;
+
+import java.util.List;
 
 public interface ProductoService {
-    void crear(Producto producto);
-    void actualizar(Integer id, Producto producto);
+    ProductoResponse crear(ProductoRequest producto);
+    ProductoResponse actualizar(Integer id, ProductoRequest producto);
     void eliminar(Integer id);
+    List<ProductoResponse> obtenerTodos();
 }
