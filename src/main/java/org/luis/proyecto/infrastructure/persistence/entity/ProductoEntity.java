@@ -1,19 +1,32 @@
 package org.luis.proyecto.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
+@Entity
 @Table(name = "productos")
 public class ProductoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Integer id;
+    @NotNull
+    @NotBlank
     private String nombre;
+    @Column(unique = true)
+    @NotNull
+    @NotBlank
     private String codigo;
+    @NotNull
+    @NotBlank
     private String descripcion;
+    @NotNull
+    @NotBlank
     private String categoria;
+    @NotNull
     private BigDecimal precio;
     private int stock;
 
@@ -25,6 +38,10 @@ public class ProductoEntity {
         this.categoria = categoria;
         this.precio = precio;
         this.stock = stock;
+    }
+
+    public ProductoEntity() {
+
     }
 
     public Integer getId() {

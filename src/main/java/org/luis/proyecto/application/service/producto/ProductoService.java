@@ -9,6 +9,8 @@ import java.util.List;
 public interface ProductoService {
     ProductoResponse crear(ProductoRequest producto);
     ProductoResponse actualizar(Integer id, ProductoRequest producto);
+    ProductoResponse actualizar(String codigo, ProductoRequest producto);
     void eliminar(Integer id);
+    ProductoResponse obtenerProducto(Integer id);
     List<ProductoResponse> obtenerTodos();
 }

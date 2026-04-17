@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/productos")
+@RequestMapping("/api/productos")
 public class ProductoController {
     private final ProductoService productoService;
 
@@ -18,18 +18,25 @@ public class ProductoController {
         this.productoService = productoService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<ProductoResponse>> getProductos() {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(productoService.obtenerTodos());
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<ProductoResponse> createProducto(@RequestBody ProductoRequest productoRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(productoService.crear(productoRequest));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductoResponse> getProducto(@PathVariable Integer id) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(productoService.obtenerProducto(id));
     }
 
     @PutMapping("/{id}")

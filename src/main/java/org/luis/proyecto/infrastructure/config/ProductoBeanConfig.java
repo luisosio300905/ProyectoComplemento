@@ -2,14 +2,8 @@ package org.luis.proyecto.infrastructure.config;
 
 import org.luis.proyecto.application.service.producto.ProductoService;
 import org.luis.proyecto.application.service.producto.impl.ProductoServiceImpl;
-import org.luis.proyecto.application.usecase.producto.ActualizarProductoUseCase;
-import org.luis.proyecto.application.usecase.producto.CrearProductoUseCase;
-import org.luis.proyecto.application.usecase.producto.EliminarProductoUseCase;
-import org.luis.proyecto.application.usecase.producto.ListaProductosUseCase;
-import org.luis.proyecto.application.usecase.producto.impl.ActualizarProductoUseCaseImpl;
-import org.luis.proyecto.application.usecase.producto.impl.CrearProductoUseCaseImpl;
-import org.luis.proyecto.application.usecase.producto.impl.EliminarProductoUseCaseImpl;
-import org.luis.proyecto.application.usecase.producto.impl.ListaProductosUseCaseImpl;
+import org.luis.proyecto.application.usecase.producto.*;
+import org.luis.proyecto.application.usecase.producto.impl.*;
 import org.luis.proyecto.domain.repository.ProductoRepository;
 import org.luis.proyecto.infrastructure.mapper.ProductoMapper;
 import org.springframework.context.annotation.Bean;
@@ -39,13 +33,19 @@ public class ProductoBeanConfig {
     }
 
     @Bean
+    public ObtenerProductoUseCase obtenerProductoUseCase(ProductoRepository productoRepository) {
+        return new ObtenerProductoUseCaseImpl(productoRepository);
+    }
+
+    @Bean
     public ProductoService productoService
             (
             CrearProductoUseCase crearProductoUseCase,
             ActualizarProductoUseCase actualizarProductoUseCase,
             EliminarProductoUseCase eliminarProductoUseCase,
             ListaProductosUseCase listaProductosUseCase,
-            ProductoMapper productoMapper
+            ProductoMapper productoMapper,
+            ObtenerProductoUseCase obtenerProductoUseCase
             ) {
         return new ProductoServiceImpl
                 (
@@ -53,6 +53,7 @@ public class ProductoBeanConfig {
                 actualizarProductoUseCase,
                 eliminarProductoUseCase,
                 listaProductosUseCase,
+                obtenerProductoUseCase,
                 productoMapper
         );
     }

@@ -32,6 +32,13 @@ public class ProductoRepositoryAdapter implements ProductoRepository {
     }
 
     @Override
+    public Optional<Producto> findByCodigo(String codigo) {
+        return jpaProductoRepository
+                .findByCodigo(codigo)
+                .map(p -> productoMapper.toProducto(p));
+    }
+
+    @Override
     public void deleteById(Integer id) {
         jpaProductoRepository.deleteById(id);
     }

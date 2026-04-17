@@ -14,12 +14,23 @@ public class ActualizarProductoUseCaseImpl implements ActualizarProductoUseCase 
     @Override
     public Producto actualizar(Integer id, Producto producto) {
         Producto productoActualizar = productoRepository.findById(id).orElseThrow();
-        productoActualizar.setCategoria(producto.getCategoria());
-        productoActualizar.setCodigo(producto.getCodigo());
-        productoActualizar.setDescripcion(producto.getDescripcion());
-        productoActualizar.setNombre(producto.getNombre());
-        productoActualizar.setPrecio(producto.getPrecio());
-        productoActualizar.setStock(producto.getStock());
+        actualizarProducto(productoActualizar, producto);
         return productoRepository.save(productoActualizar);
+    }
+
+    @Override
+    public Producto actualizar(String codigo, Producto producto) {
+        Producto productoActualizar = productoRepository.findByCodigo(codigo).orElseThrow();
+        actualizarProducto(productoActualizar, producto);
+        return null;
+    }
+
+    private void actualizarProducto(Producto producto1, Producto producto2) {
+        producto1.setCategoria(producto2.getCategoria());
+        producto1.setCodigo(producto2.getCodigo());
+        producto1.setDescripcion(producto2.getDescripcion());
+        producto1.setNombre(producto2.getNombre());
+        producto1.setPrecio(producto2.getPrecio());
+        producto1.setStock(producto2.getStock());
     }
 }
