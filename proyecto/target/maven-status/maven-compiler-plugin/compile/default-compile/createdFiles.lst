@@ -1,0 +1,11 @@
+org\luis\proyecto\domain\model\empleado\Empleado.class
+org\luis\proyecto\AplicacionProyecto.class
+org\luis\proyecto\application\crear\producto\CrearProductoUseCase.class
+org\luis\proyecto\domain\repository\empleado\EmpleadoRepository.class
+org\luis\proyecto\domain\model\compra\Compra.class
+org\luis\proyecto\domain\model\documento_identidad\DocumentoIdentidad.class
+org\luis\proyecto\domain\model\producto\Producto.class
+org\luis\proyecto\domain\repository\producto\ProductoRepository.class
+org\luis\proyecto\domain\model\comprobante_pago\ComprobantePago.class
+org\luis\proyecto\domain\model\pedido\Pedido.class
+org\luis\proyecto\domain\model\proveedor\Proveedor.class
