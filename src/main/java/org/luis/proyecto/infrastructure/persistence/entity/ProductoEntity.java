@@ -13,20 +13,15 @@ public class ProductoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Integer id;
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private String nombre;
-    @Column(unique = true)
-    @NotNull
-    @NotBlank
+    @Column(unique = true, nullable = false)
     private String codigo;
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private String descripcion;
-    @NotNull
-    @NotBlank
+    @Column(nullable = false)
     private String categoria;
-    @NotNull
+    @Column(nullable = false)
     private BigDecimal precio;
     private int stock;
 
