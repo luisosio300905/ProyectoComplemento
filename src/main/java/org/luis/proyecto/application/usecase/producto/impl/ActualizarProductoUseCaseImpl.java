@@ -22,7 +22,7 @@ public class ActualizarProductoUseCaseImpl implements ActualizarProductoUseCase 
     public Producto actualizar(String codigo, Producto producto) {
         Producto productoActualizar = productoRepository.findByCodigo(codigo).orElseThrow();
         actualizarProducto(productoActualizar, producto);
-        return null;
+        return productoActualizar;
     }
 
     private void actualizarProducto(Producto producto1, Producto producto2) {
