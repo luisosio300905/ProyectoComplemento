@@ -6,5 +6,6 @@ public class DetalleVenta {
     private Integer id;
     private Venta venta;
     private Producto producto;
+    private int cantidad;
     private BigDecimal subTotal;
 }
