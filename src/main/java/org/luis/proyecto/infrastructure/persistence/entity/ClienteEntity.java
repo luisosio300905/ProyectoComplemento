@@ -1,8 +1,6 @@
 package org.luis.proyecto.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
-import org.luis.proyecto.domain.model.ComprobantePago;
-import org.luis.proyecto.domain.model.TipoDocumentoIdentidad;
 
 import java.util.List;
 
@@ -18,17 +16,17 @@ public class ClienteEntity {
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private TipoDocumentoIdentidad tipoDocumentoIdentidad;
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_documento_identidad")
+    private TipoDocumentoIdentidadEntity tipoDocumentoIdentidad;
     private String numeroDocumento;
     private String direccion;
     private String celular;
     private String correo;
     @OneToMany
-    @JoinColumn("id_comprobante_pago")
-    private List<ComprobantePago> comprobantes;
+    private List<ComprobantePagoEntity> comprobantes;
 
-
-    public ClienteEntity(String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidad tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePago> comprobantes) {
+    public ClienteEntity(String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidadEntity tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePagoEntity> comprobantes) {
         this.descripcion = descripcion;
         this.razonSocial = razonSocial;
         this.nombres = nombres;
@@ -42,99 +40,22 @@ public class ClienteEntity {
         this.comprobantes = comprobantes;
     }
 
-    public Integer getId() {
-        return id;
+    public ClienteEntity() {
+
     }
 
-    public void setId(Integer id) {
+    public ClienteEntity(Integer id, String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidadEntity tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePagoEntity> comprobantes) {
         this.id = id;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getRazonSocial() {
-        return razonSocial;
-    }
-
-    public void setRazonSocial(String razonSocial) {
         this.razonSocial = razonSocial;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
         this.nombres = nombres;
-    }
-
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
-    }
-
-    public TipoDocumentoIdentidad getTipoDocumentoIdentidad() {
-        return tipoDocumentoIdentidad;
-    }
-
-    public void setTipoDocumentoIdentidad(TipoDocumentoIdentidad tipoDocumentoIdentidad) {
         this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
-    }
-
-    public String getNumeroDocumento() {
-        return numeroDocumento;
-    }
-
-    public void setNumeroDocumento(String numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
         this.celular = celular;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public List<ComprobantePago> getComprobantes() {
-        return comprobantes;
-    }
-
-    public void setComprobantes(List<ComprobantePago> comprobantes) {
         this.comprobantes = comprobantes;
     }
 }

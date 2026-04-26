@@ -1,6 +1,5 @@
 package org.luis.proyecto.infrastructure.rest;
 
-import org.apache.coyote.Response;
 import org.luis.proyecto.application.service.usuario.UsuarioService;
 import org.luis.proyecto.domain.model.Usuario;
 import org.luis.proyecto.infrastructure.mapper.UsuarioMapper;
@@ -13,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

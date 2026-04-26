@@ -1,7 +1,6 @@
 package org.luis.proyecto.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
-import org.luis.proyecto.domain.model.Cliente;
 import org.luis.proyecto.domain.model.TipoComprobantePago;
 
 import java.math.BigDecimal;
@@ -14,9 +13,11 @@ public class ComprobantePagoEntity {
     @Column(name = "id_comprobante_pago")
     private Integer id;
     @ManyToOne
-    @JoinColumn(name = "comprobantes")
-    private Cliente cliente;
+    @JoinColumn(name = "id_cliente")
+    private ClienteEntity cliente;
     private BigDecimal total;
-    private TipoComprobantePago tipoComprobantePago;
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_comprobante_pago")
+    private TipoComprobantePagoEntity tipoComprobantePago;
     private String descripcion;
 }
