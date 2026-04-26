@@ -8,6 +8,7 @@ import java.util.List;
 public interface UsuarioService {
     Usuario crear(UsuarioRequest usuario);
     Usuario actualizar(Integer id, UsuarioRequest usuario);
+    Usuario actualizar(String nombre, UsuarioRequest usuario);
     void eliminar(Integer id);
     Usuario obtenerUsuario(Integer id);
     Usuario obtenerPorNombre(String nombre);
