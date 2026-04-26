@@ -11,7 +11,8 @@ public class TipoComprobantePagoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String tipoComprobante;
-    @OneToMany
+    @ManyToOne
+    @JoinColumn(name = "id_comprobante_pago")
     private List<ComprobantePagoEntity> comprobantesPago;
 
 

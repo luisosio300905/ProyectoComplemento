@@ -5,7 +5,6 @@ import org.luis.proyecto.application.service.usuario.impl.UsuarioServiceImpl;
 import org.luis.proyecto.application.usecase.usuario.*;
 import org.luis.proyecto.application.usecase.usuario.impl.*;
 import org.luis.proyecto.domain.repository.UsuarioRepository;
-import org.luis.proyecto.infrastructure.mapper.UsuarioMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;

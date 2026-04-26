@@ -11,6 +11,7 @@ import java.util.List;
 public class ClienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private Integer id;
     private String descripcion;
     private String razonSocial;
@@ -22,6 +23,8 @@ public class ClienteEntity {
     private String direccion;
     private String celular;
     private String correo;
+    @OneToMany
+    @JoinColumn("id_comprobante_pago")
     private List<ComprobantePago> comprobantes;
 
 

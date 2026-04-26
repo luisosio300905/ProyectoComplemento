@@ -11,7 +11,10 @@ import java.math.BigDecimal;
 public class ComprobantePagoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_comprobante_pago")
     private Integer id;
+    @ManyToOne
+    @JoinColumn(name = "comprobantes")
     private Cliente cliente;
     private BigDecimal total;
     private TipoComprobantePago tipoComprobantePago;
