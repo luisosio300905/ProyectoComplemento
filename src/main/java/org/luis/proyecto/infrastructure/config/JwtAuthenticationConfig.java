@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Configuration
 public class JwtAuthenticationConfig {
-    public String getJWTToken(String username) {
+    public String getJwtToken(String username) {
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_USER");
 
