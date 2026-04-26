@@ -32,7 +32,8 @@ public class ProductoController {
     public ResponseEntity<ProductoResponse> createProducto(@RequestBody ProductoRequest productoRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(productoMapper.toProductoResponse(productoService.crear(productoRequest)));
+                .body(productoMapper.toProductoResponse(
+                        productoService.crear(productoMapper.toProducto(productoRequest))));
     }
 
     @GetMapping("/{id}")
@@ -46,7 +47,8 @@ public class ProductoController {
     public ResponseEntity<ProductoResponse> updateProducto(@PathVariable Integer id, @RequestBody ProductoRequest productoRequest) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(productoMapper.toProductoResponse(productoService.actualizar(id, productoRequest)));
+                .body(productoMapper.toProductoResponse(
+                        productoService.actualizar(id, productoMapper.toProducto(productoRequest))));
     }
 
     @DeleteMapping("/{id}")

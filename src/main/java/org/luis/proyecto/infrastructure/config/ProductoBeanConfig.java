@@ -44,7 +44,6 @@ public class ProductoBeanConfig {
             ActualizarProductoUseCase actualizarProductoUseCase,
             EliminarProductoUseCase eliminarProductoUseCase,
             ListaProductosUseCase listaProductosUseCase,
-            ProductoMapper productoMapper,
             ObtenerProductoUseCase obtenerProductoUseCase
             ) {
         return new ProductoServiceImpl
@@ -53,8 +52,7 @@ public class ProductoBeanConfig {
                 actualizarProductoUseCase,
                 eliminarProductoUseCase,
                 listaProductosUseCase,
-                obtenerProductoUseCase,
-                productoMapper
+                obtenerProductoUseCase
         );
     }
 }

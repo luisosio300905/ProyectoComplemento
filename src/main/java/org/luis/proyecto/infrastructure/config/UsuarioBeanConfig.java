@@ -8,13 +8,14 @@ import org.luis.proyecto.domain.repository.UsuarioRepository;
 import org.luis.proyecto.infrastructure.mapper.UsuarioMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class UsuarioBeanConfig {
 
     @Bean
-    public CrearUsuarioUseCase crearUsuarioUseCase(UsuarioRepository usuarioRepository) {
-        return new CrearUsuarioUseCaseImpl(usuarioRepository);
+    public CrearUsuarioUseCase crearUsuarioUseCase(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        return new CrearUsuarioUseCaseImpl(usuarioRepository, passwordEncoder);
     }
 
     @Bean
@@ -43,15 +44,13 @@ public class UsuarioBeanConfig {
             ActualizarUsuarioUseCase actualizarUsuarioUseCase,
             EliminarUsuarioUseCase eliminarUsuarioUseCase,
             ListaUsuariosUseCase listaUsuariosUseCase,
-            ObtenerUsuarioUseCase obtenerUsuarioUseCase,
-            UsuarioMapper usuarioMapper) {
+            ObtenerUsuarioUseCase obtenerUsuarioUseCase) {
         return new UsuarioServiceImpl(
                 crearUsuarioUseCase,
                 actualizarUsuarioUseCase,
                 eliminarUsuarioUseCase,
                 listaUsuariosUseCase,
-                obtenerUsuarioUseCase,
-                usuarioMapper
+                obtenerUsuarioUseCase
         );
     }
 }

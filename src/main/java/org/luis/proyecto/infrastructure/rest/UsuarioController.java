@@ -32,7 +32,8 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponse> createUsuario(@RequestBody UsuarioRequest usuarioRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(usuarioMapper.toUsuarioResponse(usuarioService.crear(usuarioRequest)));
+                .body(usuarioMapper.toUsuarioResponse(
+                        usuarioService.crear(usuarioMapper.toUsuario(usuarioRequest))));
     }
 
     @GetMapping("/{id}")
@@ -53,7 +54,8 @@ public class UsuarioController {
     public ResponseEntity<UsuarioResponse> updateUsuario(@PathVariable Integer id, @RequestBody UsuarioRequest usuarioRequest) {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(usuarioMapper.toUsuarioResponse(usuarioService.actualizar(id, usuarioRequest)));
+                .body(usuarioMapper.toUsuarioResponse(
+                        usuarioService.actualizar(id, usuarioMapper.toUsuario(usuarioRequest))));
     }
 
     @DeleteMapping("/{id}")

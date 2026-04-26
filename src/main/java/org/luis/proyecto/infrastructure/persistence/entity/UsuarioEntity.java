@@ -18,6 +18,10 @@ public class UsuarioEntity {
         this.contrasenia = contrasenia;
     }
 
+    public UsuarioEntity() {
+
+    }
+
     public Integer getId() {
         return id;
     }

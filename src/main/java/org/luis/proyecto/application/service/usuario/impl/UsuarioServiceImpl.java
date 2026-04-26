@@ -3,8 +3,7 @@ package org.luis.proyecto.application.service.usuario.impl;
 import org.luis.proyecto.application.usecase.usuario.*;
 import org.luis.proyecto.application.service.usuario.UsuarioService;
 import org.luis.proyecto.domain.model.Usuario;
-import org.luis.proyecto.infrastructure.mapper.UsuarioMapper;
-import org.luis.proyecto.infrastructure.rest.request.UsuarioRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -14,30 +13,28 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final EliminarUsuarioUseCase eliminarUsuarioUseCase;
     private final ListaUsuariosUseCase listaUsuariosUseCase;
     private final ObtenerUsuarioUseCase obtenerUsuarioUseCase;
-    private final UsuarioMapper usuarioMapper;
 
-    public UsuarioServiceImpl(CrearUsuarioUseCase crearUsuarioUseCase, ActualizarUsuarioUseCase actualizarUsuarioUseCase, EliminarUsuarioUseCase eliminarUsuarioUseCase, ListaUsuariosUseCase listaUsuariosUseCase, ObtenerUsuarioUseCase obtenerUsuarioUseCase, UsuarioMapper usuarioMapper) {
+    public UsuarioServiceImpl(CrearUsuarioUseCase crearUsuarioUseCase, ActualizarUsuarioUseCase actualizarUsuarioUseCase, EliminarUsuarioUseCase eliminarUsuarioUseCase, ListaUsuariosUseCase listaUsuariosUseCase, ObtenerUsuarioUseCase obtenerUsuarioUseCase) {
         this.crearUsuarioUseCase = crearUsuarioUseCase;
         this.actualizarUsuarioUseCase = actualizarUsuarioUseCase;
         this.eliminarUsuarioUseCase = eliminarUsuarioUseCase;
         this.listaUsuariosUseCase = listaUsuariosUseCase;
         this.obtenerUsuarioUseCase = obtenerUsuarioUseCase;
-        this.usuarioMapper = usuarioMapper;
     }
 
     @Override
-    public Usuario crear(UsuarioRequest usuario) {
-        return crearUsuarioUseCase.crear(usuarioMapper.toUsuario(usuario));
+    public Usuario crear(Usuario usuario) {
+        return crearUsuarioUseCase.crear(usuario);
     }
 
     @Override
-    public Usuario actualizar(Integer id, UsuarioRequest usuario) {
-        return actualizarUsuarioUseCase.actualizar(id, usuarioMapper.toUsuario(usuario));
+    public Usuario actualizar(Integer id, Usuario usuario) {
+        return actualizarUsuarioUseCase.actualizar(id, usuario);
     }
 
     @Override
-    public Usuario actualizar(String nombre, UsuarioRequest usuario) {
-        return actualizarUsuarioUseCase.actualizar(nombre, usuarioMapper.toUsuario(usuario));
+    public Usuario actualizar(String nombre, Usuario usuario) {
+        return actualizarUsuarioUseCase.actualizar(nombre, usuario);
     }
 
     @Override

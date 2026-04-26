@@ -3,6 +3,7 @@ package org.luis.proyecto.application.usecase.usuario.impl;
 import org.luis.proyecto.application.usecase.usuario.ObtenerUsuarioUseCase;
 import org.luis.proyecto.domain.model.Usuario;
 import org.luis.proyecto.domain.repository.UsuarioRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class ObtenerUsuarioUseCaseImpl implements ObtenerUsuarioUseCase {
     private final UsuarioRepository usuarioRepository;
