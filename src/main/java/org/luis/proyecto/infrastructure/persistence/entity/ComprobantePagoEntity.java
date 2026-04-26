@@ -1,7 +1,6 @@
 package org.luis.proyecto.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
-import org.luis.proyecto.domain.model.TipoComprobantePago;
 
 import java.math.BigDecimal;
 
