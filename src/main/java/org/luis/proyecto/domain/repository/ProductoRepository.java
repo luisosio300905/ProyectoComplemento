@@ -1,7 +1,6 @@
 package org.luis.proyecto.domain.repository;
 
 import org.luis.proyecto.domain.model.Producto;
-
 import java.util.List;
 import java.util.Optional;
 

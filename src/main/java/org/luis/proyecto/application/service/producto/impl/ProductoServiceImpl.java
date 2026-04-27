@@ -21,14 +21,17 @@ public class ProductoServiceImpl implements ProductoService {
         this.obtenerProductoUseCase = obtenerProductoUseCase;
     }
 
+    @Override
     public Producto crear(Producto producto) {
         return crearProductoUseCase.crear(producto);
     }
 
+    @Override
     public Producto actualizar(Integer id, Producto producto) {
         return actualizarProductoUseCase.actualizar(id, producto);
     }
 
+    @Override
     public Producto actualizar(String codigo, Producto producto) {
         return actualizarProductoUseCase.actualizar(codigo, producto);
     }
