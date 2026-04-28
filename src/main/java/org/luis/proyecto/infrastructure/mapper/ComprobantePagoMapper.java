@@ -14,23 +14,25 @@ import java.util.List;
 public class ComprobantePagoMapper {
 
     public ComprobantePago toComprobantePago(ComprobantePagoEntity entity) {
-        return new ComprobantePago(
-                entity.getId(),
-                entity.getCliente(), //usar mapper de cliente
-                entity.getTotal(),
-                entity.getTipoComprobantePago(), //usar mapper de tipocomprobantepago
-                entity.getDescripcion()
-        );
+//        return new ComprobantePago(
+//                entity.getId(),
+//                entity.getCliente(), //usar mapper de cliente
+//                entity.getTotal(),
+//                entity.getTipoComprobantePago(), //usar mapper de tipocomprobantepago
+//                entity.getDescripcion()
+//        );
+        return null;
     }
 
     public ComprobantePagoEntity toComprobantePagoEntity(ComprobantePago comprobantePago){
-        return new ComprobantePagoEntity(
-                comprobantePago.getId(),
-                comprobantePago.getCliente(), //usar mapper de cliente
-                comprobantePago.getTotal(),
-                comprobantePago.getTipoComprobantePago(), //usar mapper de tipocomprobantepago
-                comprobantePago.getDescripcion()
-        );
+//        return new ComprobantePagoEntity(
+//                comprobantePago.getId(),
+//                comprobantePago.getCliente(), //usar mapper de cliente
+//                comprobantePago.getTotal(),
+//                comprobantePago.getTipoComprobantePago(), //usar mapper de tipocomprobantepago
+//                comprobantePago.getDescripcion()
+//        );
+        return null;
     }
 
     public ComprobantePago toComprobantePago(ComprobantePagoRequest comprobantePagoRequest){
