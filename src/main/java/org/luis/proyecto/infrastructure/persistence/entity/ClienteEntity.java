@@ -17,14 +17,16 @@ public class ClienteEntity {
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
-    private TipoDocumentoIdentidad tipoDocumentoIdentidad;
+    @ManyToOne
+    private TipoDocumentoIdentidadEntity tipoDocumentoIdentidad;
     private String numeroDocumento;
     private String direccion;
     private String celular;
     private String correo;
-    private List<ComprobantePago> comprobantes;
+    @OneToMany(mappedBy = "cliente")
+    private List<ComprobantePagoEntity> comprobantes;
 
-    public ClienteEntity(Integer id,String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidad tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePago> comprobantes) {
+    public ClienteEntity(Integer id,String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidadEntity tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePagoEntity> comprobantes) {
         this.id = id;
         this.descripcion = descripcion;
         this.razonSocial = razonSocial;
@@ -90,11 +92,11 @@ public class ClienteEntity {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public TipoDocumentoIdentidad getTipoDocumentoIdentidad() {
+    public TipoDocumentoIdentidadEntity getTipoDocumentoIdentidad() {
         return tipoDocumentoIdentidad;
     }
 
-    public void setTipoDocumentoIdentidad(TipoDocumentoIdentidad tipoDocumentoIdentidad) {
+    public void setTipoDocumentoIdentidad(TipoDocumentoIdentidadEntity tipoDocumentoIdentidad) {
         this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
     }
 
@@ -130,11 +132,11 @@ public class ClienteEntity {
         this.correo = correo;
     }
 
-    public List<ComprobantePago> getComprobantes() {
+    public List<ComprobantePagoEntity> getComprobantes() {
         return comprobantes;
     }
 
-    public void setComprobantes(List<ComprobantePago> comprobantes) {
+    public void setComprobantes(List<ComprobantePagoEntity> comprobantes) {
         this.comprobantes = comprobantes;
     }
 }

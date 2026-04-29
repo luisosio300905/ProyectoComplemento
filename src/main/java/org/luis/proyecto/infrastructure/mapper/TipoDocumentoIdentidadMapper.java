@@ -4,9 +4,11 @@ import org.luis.proyecto.domain.model.TipoDocumentoIdentidad;
 import org.luis.proyecto.infrastructure.persistence.entity.TipoDocumentoIdentidadEntity;
 import org.luis.proyecto.infrastructure.rest.request.TipoDocumentoIdentidadRequest;
 import org.luis.proyecto.infrastructure.rest.response.TipoDocumentoIdentidadResponse;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class TipoDocumentoIdentidadMapper
 {
     public TipoDocumentoIdentidad toTipoDocumentoIdentidad(TipoDocumentoIdentidadEntity tipodocumentoidentidadEntity) {

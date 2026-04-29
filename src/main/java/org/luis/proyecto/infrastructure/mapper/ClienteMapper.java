@@ -4,10 +4,18 @@ import org.luis.proyecto.domain.model.Cliente;
 import org.luis.proyecto.infrastructure.persistence.entity.ClienteEntity;
 import org.luis.proyecto.infrastructure.rest.request.ClienteRequest;
 import org.luis.proyecto.infrastructure.rest.response.ClienteResponse;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class ClienteMapper {
+    private final TipoDocumentoIdentidadMapper tipoDocumentoIdentidadMapper;
+
+    public ClienteMapper(TipoDocumentoIdentidadMapper tipoDocumentoIdentidadMapper) {
+        this.tipoDocumentoIdentidadMapper = tipoDocumentoIdentidadMapper;
+    }
+
     public Cliente toCliente(ClienteEntity clienteEntity) {
         return new Cliente(
                 clienteEntity.getId(),
@@ -16,7 +24,8 @@ public class ClienteMapper {
                 clienteEntity.getNombres(),
                 clienteEntity.getApellidoPaterno(),
                 clienteEntity.getApellidoMaterno(),
-                clienteEntity.getTipoDocumentoIdentidad(),
+                tipoDocumentoIdentidadMapper
+                        .toTipoDocumentoIdentidad(clienteEntity.getTipoDocumentoIdentidad()),
                 clienteEntity.getNumeroDocumento(),
                 clienteEntity.getDireccion(),
                 clienteEntity.getCelular(),
@@ -33,7 +42,8 @@ public class ClienteMapper {
                 cliente.getNombres(),
                 cliente.getApellidoPaterno(),
                 cliente.getApellidoMaterno(),
-                cliente.getTipoDocumentoIdentidad(),
+                tipoDocumentoIdentidadMapper
+                        .toTipoDocumentoIdentidadEntity(cliente.getTipoDocumentoIdentidad()),
                 cliente.getNumeroDocumento(),
                 cliente.getDireccion(),
                 cliente.getCelular(),

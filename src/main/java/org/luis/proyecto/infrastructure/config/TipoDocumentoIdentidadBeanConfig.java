@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TipoDocumentoIdentidadBeanConfig {
 
-
     @Bean
     public CrearTipoDocumentoIdentidadUseCase crearTipoDocumentoIdentidadUseCase(TipoDocumentoIdentidadRepository tipodocumentoidentidadRepository) {
         return new CrearTipoDocumentoIdentidadUseCaseImpl(tipodocumentoidentidadRepository);

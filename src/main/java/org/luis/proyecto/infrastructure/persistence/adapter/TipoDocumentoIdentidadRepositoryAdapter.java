@@ -4,10 +4,12 @@ import org.luis.proyecto.domain.model.TipoDocumentoIdentidad;
 import org.luis.proyecto.domain.repository.TipoDocumentoIdentidadRepository;
 import org.luis.proyecto.infrastructure.mapper.TipoDocumentoIdentidadMapper;
 import org.luis.proyecto.infrastructure.persistence.repository.JpaTipoDocumentoIdentidadRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class TipoDocumentoIdentidadRepositoryAdapter implements TipoDocumentoIdentidadRepository {
 
     private final JpaTipoDocumentoIdentidadRepository jpaTipoDocumentoIdentidadRepository;
