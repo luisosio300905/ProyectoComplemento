@@ -1,5 +1,4 @@
 package org.luis.proyecto.infrastructure.config;
-
 import org.luis.proyecto.infrastructure.security.AuthEntryPointJwt;
 import org.luis.proyecto.infrastructure.security.AuthTokenFilter;
 import org.luis.proyecto.infrastructure.security.JwtUtil;
