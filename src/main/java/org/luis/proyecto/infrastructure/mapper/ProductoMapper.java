@@ -54,10 +54,12 @@ public class ProductoMapper {
 
     public ProductoResponse toProductoResponse(Producto producto) {
         return new ProductoResponse(
+                producto.getId(),
                 producto.getNombre(),
                 producto.getDescripcion(),
                 producto.getCategoria(),
-                producto.getPrecio()
+                producto.getPrecio(),
+                producto.getStock()
         );
     }
 

@@ -1,13 +1,25 @@
-package org.luis.proyecto.domain.model;
+package org.luis.proyecto.infrastructure.persistence.entity;
 
-public class Usuario {
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "usuarios")
+public class UsuarioEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Integer id;
+    @Column(unique = true)
     private String nombre;
     private String contrasenia;
 
-    public Usuario(String nombre, String contraseña) {
+    public UsuarioEntity(String nombre, String contrasenia) {
         this.nombre = nombre;
-        this.contrasenia = contraseña;
+        this.contrasenia = contrasenia;
+    }
+
+    public UsuarioEntity() {
+
     }
 
     public Integer getId() {
