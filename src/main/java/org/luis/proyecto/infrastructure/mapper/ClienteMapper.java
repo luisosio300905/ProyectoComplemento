@@ -77,6 +77,7 @@ public class ClienteMapper {
 
    public ClienteResponse toClienteResponse(Cliente cliente) {
         return new ClienteResponse(
+                cliente.getId(),
                 cliente.getDescripcion(),
                 cliente.getRazonSocial(),
                 cliente.getNombres(),
