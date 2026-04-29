@@ -1,8 +1,10 @@
 package org.luis.proyecto.application.service.cliente.impl;
 
-import org.luis.proyecto.application.usecase.cliente.*;
 import org.luis.proyecto.application.service.cliente.ClienteService;
-import org.luis.proyecto.domain.model.Cliente;
+import org.luis.proyecto.application.usecase.cliente.*;
+import org.luis.proyecto.infrastructure.mapper.ClienteMapper;
+import org.luis.proyecto.infrastructure.rest.request.ClienteRequest;
+import org.luis.proyecto.infrastructure.rest.response.ClienteResponse;
 
 import java.util.List;
 
@@ -12,23 +14,36 @@ public class ClienteServiceImpl implements ClienteService {
     private final EliminarClienteUseCase eliminarClienteUseCase;
     private final ListaClientesUseCase listaClientesUseCase;
     private final ObtenerClienteUseCase obtenerClienteUseCase;
+    private final ClienteMapper clienteMapper;
 
-    public ClienteServiceImpl(CrearClienteUseCase crearClienteUseCase, ActualizarClienteUseCase actualizarClienteUseCase, EliminarClienteUseCase eliminarClienteUseCase, ListaClientesUseCase listaClientesUseCase, ObtenerClienteUseCase obtenerClienteUseCase) {
+    public ClienteServiceImpl(
+            CrearClienteUseCase crearClienteUseCase,
+            ActualizarClienteUseCase actualizarClienteUseCase,
+            EliminarClienteUseCase eliminarClienteUseCase,
+            ListaClientesUseCase listaClientesUseCase,
+            ObtenerClienteUseCase obtenerClienteUseCase,
+            ClienteMapper clienteMapper
+    ) {
         this.crearClienteUseCase = crearClienteUseCase;
         this.actualizarClienteUseCase = actualizarClienteUseCase;
         this.eliminarClienteUseCase = eliminarClienteUseCase;
         this.listaClientesUseCase = listaClientesUseCase;
         this.obtenerClienteUseCase = obtenerClienteUseCase;
+        this.clienteMapper = clienteMapper;
     }
 
     @Override
-    public Cliente crear(Cliente cliente) {
-        return crearClienteUseCase.crear(cliente);
+    public ClienteResponse crear(ClienteRequest cliente) {
+        return clienteMapper.toClienteResponse(
+                crearClienteUseCase.crear(clienteMapper.toCliente(cliente))
+        );
     }
 
     @Override
-    public Cliente actualizar(Integer id, Cliente cliente) {
-        return actualizarClienteUseCase.actualizar(id, cliente);
+    public ClienteResponse actualizar(Integer id, ClienteRequest cliente) {
+        return clienteMapper.toClienteResponse(
+                actualizarClienteUseCase.actualizar(id, clienteMapper.toCliente(cliente))
+        );
     }
 
     @Override
@@ -37,13 +52,16 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente obtenerCliente(Integer id) {
-        return obtenerClienteUseCase.obtenerCliente(id);
+    public ClienteResponse obtenerCliente(Integer id) {
+        return clienteMapper.toClienteResponse(
+                obtenerClienteUseCase.obtenerCliente(id)
+        );
     }
 
     @Override
-    public List<Cliente> obtenerTodos() {
-        return listaClientesUseCase.obtenerTodos();
+    public List<ClienteResponse> obtenerTodos() {
+        return clienteMapper.toClienteResponseList(
+                listaClientesUseCase.obtenerTodos()
+        );
     }
 }
-
