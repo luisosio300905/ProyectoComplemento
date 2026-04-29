@@ -16,6 +16,21 @@ public class Cliente {
     private String correo;
     private List<ComprobantePago> comprobantes;
 
+    public Cliente(Integer id,String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidad tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePago> comprobantes) {
+        this.id = id;
+        this.descripcion = descripcion;
+        this.razonSocial = razonSocial;
+        this.nombres = nombres;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
+        this.numeroDocumento = numeroDocumento;
+        this.direccion = direccion;
+        this.celular = celular;
+        this.correo = correo;
+        this.comprobantes = comprobantes;
+    }
+
     public Cliente(String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidad tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePago> comprobantes) {
         this.descripcion = descripcion;
         this.razonSocial = razonSocial;

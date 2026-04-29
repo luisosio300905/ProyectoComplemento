@@ -24,8 +24,8 @@ public class ClienteEntity {
     private String correo;
     private List<ComprobantePago> comprobantes;
 
-
-    public ClienteEntity(String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidad tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePago> comprobantes) {
+    public ClienteEntity(Integer id,String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidad tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePago> comprobantes) {
+        this.id = id;
         this.descripcion = descripcion;
         this.razonSocial = razonSocial;
         this.nombres = nombres;
@@ -37,6 +37,9 @@ public class ClienteEntity {
         this.celular = celular;
         this.correo = correo;
         this.comprobantes = comprobantes;
+    }
+
+    public ClienteEntity() {
     }
 
     public Integer getId() {
