@@ -40,6 +40,7 @@ public class TipoDocumentoIdentidadMapper
 
     public TipoDocumentoIdentidadResponse toTipoDocumentoIdentidadResponse(TipoDocumentoIdentidad tipodocumentoidentidad) {
         return new TipoDocumentoIdentidadResponse(
+                tipodocumentoidentidad.getId(),
                 tipodocumentoidentidad.getNombre()
         );
     }
