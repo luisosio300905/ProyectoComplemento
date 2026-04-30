@@ -12,10 +12,12 @@ import java.util.List;
 public class UsuarioMapper {
 
     public Usuario toUsuario(UsuarioEntity usuarioEntity) {
-        return new Usuario(
+        Usuario usuario = new Usuario(
                 usuarioEntity.getNombre(),
                 usuarioEntity.getContrasenia()
         );
+        usuario.setId(usuarioEntity.getId());
+        return usuario;
     }
 
     public UsuarioEntity toUsuarioEntity(Usuario usuario) {
@@ -45,6 +47,7 @@ public class UsuarioMapper {
 
     public UsuarioResponse toUsuarioResponse(Usuario usuario) {
         return new UsuarioResponse(
+                usuario.getId(),
                 usuario.getNombre()
         );
     }

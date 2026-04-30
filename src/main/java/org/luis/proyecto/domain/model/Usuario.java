@@ -5,6 +5,9 @@ public class Usuario {
     private String nombre;
     private String contrasenia;
 
+    public Usuario() {
+    }
+
     public Usuario(String nombre, String contraseña) {
         this.nombre = nombre;
         this.contrasenia = contraseña;

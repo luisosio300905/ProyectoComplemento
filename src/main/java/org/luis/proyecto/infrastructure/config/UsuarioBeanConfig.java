@@ -18,8 +18,8 @@ public class UsuarioBeanConfig {
     }
 
     @Bean
-    public ActualizarUsuarioUseCase actualizarUsuarioUseCase(UsuarioRepository usuarioRepository) {
-        return new ActualizarUsuarioUseCaseImpl(usuarioRepository);
+    public ActualizarUsuarioUseCase actualizarUsuarioUseCase(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+        return new ActualizarUsuarioUseCaseImpl(usuarioRepository, passwordEncoder);
     }
 
     @Bean

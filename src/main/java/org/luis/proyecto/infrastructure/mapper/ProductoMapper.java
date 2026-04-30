@@ -56,6 +56,7 @@ public class ProductoMapper {
         return new ProductoResponse(
                 producto.getId(),
                 producto.getNombre(),
+                producto.getCodigo(),
                 producto.getDescripcion(),
                 producto.getCategoria(),
                 producto.getPrecio(),

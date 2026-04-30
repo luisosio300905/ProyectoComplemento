@@ -3,12 +3,15 @@ package org.luis.proyecto.application.usecase.usuario.impl;
 import org.luis.proyecto.application.usecase.usuario.ActualizarUsuarioUseCase;
 import org.luis.proyecto.domain.model.Usuario;
 import org.luis.proyecto.domain.repository.UsuarioRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class ActualizarUsuarioUseCaseImpl implements ActualizarUsuarioUseCase {
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public ActualizarUsuarioUseCaseImpl(UsuarioRepository usuarioRepository) {
+    public ActualizarUsuarioUseCaseImpl(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -27,7 +30,7 @@ public class ActualizarUsuarioUseCaseImpl implements ActualizarUsuarioUseCase {
 
     private void actualizarUsuario(Usuario usuario1, Usuario usuario2) {
         usuario1.setNombre(usuario2.getNombre());
-        usuario1.setContrasenia(usuario2.getContrasenia());
+        usuario1.setContrasenia(passwordEncoder.encode(usuario2.getContrasenia()));
     }
 }
 
