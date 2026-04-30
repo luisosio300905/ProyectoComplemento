@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.luis.proyecto.infrastructure.mapper.ProductoMapper;
+import org.luis.proyecto.infrastructure.mapper.VentaMapper;
 import org.luis.proyecto.infrastructure.rest.request.VentaRequest;
 import org.luis.proyecto.infrastructure.rest.response.VentaResponse;
 
@@ -40,7 +40,7 @@ public class VentaController {
     public ResponseEntity<VentaResponse> createVenta(@RequestBody VentaRequest ventaRequest) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(ventaMapper.toventaResponse(
+                .body(ventaMapper.toVentaResponse(
                         ventaService.crear(ventaMapper.toVenta(ventaRequest))));
     }
 

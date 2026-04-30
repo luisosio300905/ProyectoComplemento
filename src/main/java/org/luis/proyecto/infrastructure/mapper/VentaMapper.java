@@ -6,6 +6,7 @@ import java.util.List;
 import org.luis.proyecto.domain.model.Venta;
 import org.luis.proyecto.infrastructure.persistence.entity.VentaEntity;
 import org.luis.proyecto.infrastructure.rest.request.VentaRequest;
+import org.luis.proyecto.infrastructure.rest.response.VentaResponse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,32 +29,31 @@ public class VentaMapper {
 
     public Venta toVenta(VentaRequest ventaRequest) {
         return new Venta(
-                VentaRequest.fecha(),
-                VentaRequest.total());
+            ventaRequest.id(),
+                ventaRequest.fecha(),
+                ventaRequest.total()
+            );
     }
 
     public List<Venta> toVentaList(List<VentaEntity> ventaEntities) {
-        return VentaEntities
+        return ventaEntities
                 .stream()
-                .map(p -> toventa(p))
+                .map(p -> toVenta(p))
                 .toList();
     }
 
-    public ventaResponse toventaResponse(venta venta) {
-        return new ventaResponse(
+    public VentaResponse toVentaResponse(Venta venta) {
+        return new VentaResponse(
                 venta.getId(),
-                venta.getNombre(),
-                venta.getDescripcion(),
-                venta.getCategoria(),
-                venta.getPrecio(),
-                venta.getStock()
+                venta.getFecha(),
+                venta.getTotal()
         );
     }
 
-    public List<ventaResponse> toventaResponseList(List<venta> ventas) {
-        return ventas
+    public List<VentaResponse> toVentaResponseList(List<Venta> venta) {
+        return venta
                 .stream()
-                .map(p -> toventaResponse(p))
+                .map(p -> toVentaResponse(p))
                 .toList();
     }
 }
