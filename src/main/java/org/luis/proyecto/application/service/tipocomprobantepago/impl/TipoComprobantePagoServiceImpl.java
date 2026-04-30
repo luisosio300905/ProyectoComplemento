@@ -9,7 +9,7 @@ public class TipoComprobantePagoServiceImpl implements TipoComprobantePagoServic
     private final CrearTipoComprobantePagoUseCase crearTipoComprobantePagoUseCase;
     private final ActualizarTipoComprobantePagoUseCase actualizarTipoComprobantePagoUseCase;
     private final EliminarTipoComprobantePagoUseCase eliminarTipoComprobantePagoUseCase;
-    private final ListaTipoComprobantePagosUseCase listaTipoComprobantePagoUseCase;
+    private final ListaTipoComprobantePagosUseCase listaTipoComprobantePagosUseCase;
     private final ObtenerTipoComprobantePagoUseCase obtenerTipoComprobantePagoUseCase;
 
     public TipoComprobantePagoServiceImpl(
@@ -21,7 +21,7 @@ public class TipoComprobantePagoServiceImpl implements TipoComprobantePagoServic
         this.crearTipoComprobantePagoUseCase = crearTipoComprobantePagoUseCase;
         this.actualizarTipoComprobantePagoUseCase = actualizarTipoComprobantePagoUseCase;
         this.eliminarTipoComprobantePagoUseCase = eliminarTipoComprobantePagoUseCase;
-        this.listaTipoComprobantePagoUseCase = listaTipoComprobantePagoUseCase;
+        this.listaTipoComprobantePagosUseCase = listaTipoComprobantePagoUseCase;
         this.obtenerTipoComprobantePagoUseCase = obtenerTipoComprobantePagoUseCase;
     }
 
@@ -47,6 +47,6 @@ public class TipoComprobantePagoServiceImpl implements TipoComprobantePagoServic
 
     @Override
     public List<TipoComprobantePago> obtenerTodos() {
-        return listaTipoComprobantePagoUseCase.listar();
+        return listaTipoComprobantePagosUseCase.listar();
     }
 }
