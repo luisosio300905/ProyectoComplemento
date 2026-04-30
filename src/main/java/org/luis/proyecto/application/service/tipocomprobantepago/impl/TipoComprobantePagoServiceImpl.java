@@ -9,14 +9,14 @@ public class TipoComprobantePagoServiceImpl implements TipoComprobantePagoServic
     private final CrearTipoComprobantePagoUseCase crearTipoComprobantePagoUseCase;
     private final ActualizarTipoComprobantePagoUseCase actualizarTipoComprobantePagoUseCase;
     private final EliminarTipoComprobantePagoUseCase eliminarTipoComprobantePagoUseCase;
-    private final ListaTipoComprobantePagoUseCase listaTipoComprobantePagoUseCase;
+    private final ListaTipoComprobantePagosUseCase listaTipoComprobantePagoUseCase;
     private final ObtenerTipoComprobantePagoUseCase obtenerTipoComprobantePagoUseCase;
 
     public TipoComprobantePagoServiceImpl(
             CrearTipoComprobantePagoUseCase crearTipoComprobantePagoUseCase,
             ActualizarTipoComprobantePagoUseCase actualizarTipoComprobantePagoUseCase,
             EliminarTipoComprobantePagoUseCase eliminarTipoComprobantePagoUseCase,
-            ListaTipoComprobantePagoUseCase listaTipoComprobantePagoUseCase,
+            ListaTipoComprobantePagosUseCase listaTipoComprobantePagoUseCase,
             ObtenerTipoComprobantePagoUseCase obtenerTipoComprobantePagoUseCase) {
         this.crearTipoComprobantePagoUseCase = crearTipoComprobantePagoUseCase;
         this.actualizarTipoComprobantePagoUseCase = actualizarTipoComprobantePagoUseCase;
