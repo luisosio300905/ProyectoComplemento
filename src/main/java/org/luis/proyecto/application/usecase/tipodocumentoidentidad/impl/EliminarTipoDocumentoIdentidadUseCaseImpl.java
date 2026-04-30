@@ -4,14 +4,14 @@ import org.luis.proyecto.application.usecase.tipodocumentoidentidad.EliminarTipo
 import org.luis.proyecto.domain.repository.TipoDocumentoIdentidadRepository;
 
 public class EliminarTipoDocumentoIdentidadUseCaseImpl implements EliminarTipoDocumentoIdentidadUseCase {
-    private final TipoDocumentoIdentidadRepository tipodocumentoidentidadRepository;
+    private final TipoDocumentoIdentidadRepository tipoDocumentoIdentidadRepository;
 
-    public EliminarTipoDocumentoIdentidadUseCaseImpl(TipoDocumentoIdentidadRepository tipodocumentoidentidadRepository) {
-        this.tipodocumentoidentidadRepository = tipodocumentoidentidadRepository;
+    public EliminarTipoDocumentoIdentidadUseCaseImpl(TipoDocumentoIdentidadRepository tipoDocumentoIdentidadRepository) {
+        this.tipoDocumentoIdentidadRepository = tipoDocumentoIdentidadRepository;
     }
 
     @Override
     public void eliminar(Integer id) {
-        tipodocumentoidentidadRepository.deleteById(id);
+        tipoDocumentoIdentidadRepository.deleteById(id);
     }
 }
