@@ -1,4 +1,4 @@
-package org.luis.proyecto.infrastructure.rest;
+package org.luis.proyecto.infrastructure.rest.controller;
 
 import org.luis.proyecto.application.service.cliente.ClienteService;
 import org.luis.proyecto.infrastructure.rest.request.ClienteRequest;

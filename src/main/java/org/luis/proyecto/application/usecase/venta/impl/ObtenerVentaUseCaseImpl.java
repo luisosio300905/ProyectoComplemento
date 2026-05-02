@@ -1,6 +1,7 @@
 package org.luis.proyecto.application.usecase.venta.impl;
 
 import org.luis.proyecto.application.usecase.venta.ObtenerVentaUseCase;
+import org.luis.proyecto.domain.exception.ResourceNotFoundException;
 import org.luis.proyecto.domain.model.Venta;
 import org.luis.proyecto.domain.repository.VentaRepository;
 
@@ -13,6 +14,8 @@ public class ObtenerVentaUseCaseImpl implements ObtenerVentaUseCase{
 
     @Override
     public Venta obtenerVenta(Integer id) {
-        return ventaRepository.findById(id).orElseThrow();
+        return ventaRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Venta no encontrada"));
     }
 }

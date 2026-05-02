@@ -1,6 +1,7 @@
 package org.luis.proyecto.application.usecase.comprobantepago.impl;
 
 import org.luis.proyecto.application.usecase.comprobantepago.ObtenerComprobantePagoUseCase;
+import org.luis.proyecto.domain.exception.ResourceNotFoundException;
 import org.luis.proyecto.domain.model.ComprobantePago;
 import org.luis.proyecto.domain.repository.ComprobantePagoRepository;
 
@@ -13,6 +14,8 @@ public class ObtenerComprobantePagoUseCaseImpl implements ObtenerComprobantePago
 
     @Override
     public ComprobantePago obtenerComprobantePago(Integer id) {
-        return comprobantePagoRepository.findById(id).orElseThrow();
+        return comprobantePagoRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Comprobante de pago no encontrado"));
     }
 }

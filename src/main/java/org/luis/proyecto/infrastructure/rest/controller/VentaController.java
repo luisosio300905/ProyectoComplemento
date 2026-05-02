@@ -1,4 +1,4 @@
-package org.luis.proyecto.infrastructure.rest;
+package org.luis.proyecto.infrastructure.rest.controller;
 
 
 import java.util.List;

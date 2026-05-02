@@ -1,6 +1,7 @@
-package org.luis.proyecto.infrastructure.rest;
+package org.luis.proyecto.infrastructure.rest.controller;
 
 import org.luis.proyecto.application.service.usuario.UsuarioService;
+import org.luis.proyecto.domain.exception.InvalidCredentialsException;
 import org.luis.proyecto.domain.model.Usuario;
 import org.luis.proyecto.infrastructure.mapper.UsuarioMapper;
 import org.luis.proyecto.infrastructure.rest.request.UsuarioRequest;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,19 +36,20 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UsuarioRequest usuarioRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        usuarioRequest.nombre(),
-                        usuarioRequest.contrasenia()
-                )
-        );
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        if (userDetails == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication error");
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            usuarioRequest.nombre(),
+                            usuarioRequest.contrasenia()
+                    )
+            ); //mover esta logica a la capa de aplicacion (use case)
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(jwtUtil.generateToken(userDetails.getUsername()));
+        } catch (AuthenticationException ex) {
+            throw new InvalidCredentialsException("Usuario o contraseña incorrectos");
         }
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(jwtUtil.generateToken(userDetails.getUsername()));
     }
 
     @PostMapping("/register")

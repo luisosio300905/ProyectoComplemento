@@ -1,6 +1,5 @@
-package org.luis.proyecto.infrastructure.rest;
+package org.luis.proyecto.infrastructure.rest.controller;
 import org.luis.proyecto.application.service.tipodocumentoidentidad.TipoDocumentoIdentidadService;
-import org.luis.proyecto.domain.model.TipoDocumentoIdentidad;
 import org.luis.proyecto.infrastructure.rest.request.TipoDocumentoIdentidadRequest;
 import org.luis.proyecto.infrastructure.rest.response.TipoDocumentoIdentidadResponse;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package org.luis.proyecto.infrastructure.rest;
+package org.luis.proyecto.infrastructure.rest.controller;
 
 import org.luis.proyecto.application.service.usuario.UsuarioService;
 import org.luis.proyecto.infrastructure.mapper.UsuarioMapper;
