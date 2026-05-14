@@ -1,18 +1,17 @@
 package org.luis.proyecto.application.service.cliente;
 
-import org.luis.proyecto.infrastructure.rest.request.ClienteRequest;
-import org.luis.proyecto.infrastructure.rest.response.ClienteResponse;
+import org.luis.proyecto.domain.model.Cliente;
 
 import java.util.List;
 
 public interface ClienteService {
-    ClienteResponse crear(ClienteRequest cliente);
+    Cliente crear(Cliente cliente);
 
-    ClienteResponse actualizar(Integer id, ClienteRequest cliente);
+    Cliente actualizar(Integer id, Cliente cliente);
 
     void eliminar(Integer id);
 
-    ClienteResponse obtenerCliente(Integer id);
+    Cliente obtenerCliente(Integer id);
 
-    List<ClienteResponse> obtenerTodos();
+    List<Cliente> obtenerTodos();
 }

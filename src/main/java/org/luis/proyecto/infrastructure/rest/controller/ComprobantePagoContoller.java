@@ -11,7 +11,7 @@
     import java.util.List;
 
     @RestController
-    @RequestMapping("/api/comprobantepago")
+    @RequestMapping("/api/comprobantespago")
     public class ComprobantePagoContoller {
         private final ComprobantePagoService comprobantePagoService;
         private final ComprobantePagoMapper comprobantePagoMapper;

@@ -140,4 +140,8 @@ public class Cliente {
     public void setComprobantes(List<ComprobantePago> comprobantes) {
         this.comprobantes = comprobantes;
     }
+
+    public void addComprobante(ComprobantePago comprobantePago) {
+        comprobantes.add(comprobantePago);
+    }
 }

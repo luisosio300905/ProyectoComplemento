@@ -2,6 +2,8 @@ package org.luis.proyecto.infrastructure.mapper;
 
 import org.luis.proyecto.domain.model.Cliente;
 import org.luis.proyecto.infrastructure.persistence.entity.ClienteEntity;
+import org.luis.proyecto.infrastructure.persistence.entity.TipoDocumentoIdentidadEntity;
+import org.luis.proyecto.infrastructure.persistence.repository.JpaTipoDocumentoIdentidadRepository;
 import org.luis.proyecto.infrastructure.rest.request.ClienteRequest;
 import org.luis.proyecto.infrastructure.rest.response.ClienteResponse;
 import org.springframework.stereotype.Component;
@@ -11,12 +13,18 @@ import java.util.List;
 @Component
 public class ClienteMapper {
     private final TipoDocumentoIdentidadMapper tipoDocumentoIdentidadMapper;
+    private final JpaTipoDocumentoIdentidadRepository jpaTipoDocumentoIdentidadRepository;
 
-    public ClienteMapper(TipoDocumentoIdentidadMapper tipoDocumentoIdentidadMapper) {
+    public ClienteMapper(TipoDocumentoIdentidadMapper tipoDocumentoIdentidadMapper,
+                        JpaTipoDocumentoIdentidadRepository jpaTipoDocumentoIdentidadRepository) {
         this.tipoDocumentoIdentidadMapper = tipoDocumentoIdentidadMapper;
+        this.jpaTipoDocumentoIdentidadRepository = jpaTipoDocumentoIdentidadRepository;
     }
 
     public Cliente toCliente(ClienteEntity clienteEntity) {
+        if (clienteEntity == null) {
+            return null;
+        }
         return new Cliente(
                 clienteEntity.getId(),
                 clienteEntity.getDescripcion(),
@@ -24,8 +32,7 @@ public class ClienteMapper {
                 clienteEntity.getNombres(),
                 clienteEntity.getApellidoPaterno(),
                 clienteEntity.getApellidoMaterno(),
-                tipoDocumentoIdentidadMapper
-                        .toTipoDocumentoIdentidad(clienteEntity.getTipoDocumentoIdentidad()),
+                tipoDocumentoIdentidadMapper.toTipoDocumentoIdentidad(clienteEntity.getTipoDocumentoIdentidad()),
                 clienteEntity.getNumeroDocumento(),
                 clienteEntity.getDireccion(),
                 clienteEntity.getCelular(),
@@ -35,6 +42,9 @@ public class ClienteMapper {
     }
 
     public ClienteEntity toClienteEntity(Cliente cliente) {
+        if (cliente == null) {
+            return null;
+        }
         return new ClienteEntity(
                 cliente.getId(),
                 cliente.getDescripcion(),
@@ -42,8 +52,7 @@ public class ClienteMapper {
                 cliente.getNombres(),
                 cliente.getApellidoPaterno(),
                 cliente.getApellidoMaterno(),
-                tipoDocumentoIdentidadMapper
-                        .toTipoDocumentoIdentidadEntity(cliente.getTipoDocumentoIdentidad()),
+                tipoDocumentoIdentidadMapper.toTipoDocumentoIdentidadEntity(cliente.getTipoDocumentoIdentidad()),
                 cliente.getNumeroDocumento(),
                 cliente.getDireccion(),
                 cliente.getCelular(),
@@ -53,13 +62,20 @@ public class ClienteMapper {
     }
 
     public Cliente toCliente(ClienteRequest clienteRequest) {
+        if (clienteRequest == null) {
+            return null;
+        }
+        TipoDocumentoIdentidadEntity tipoDocEntity = jpaTipoDocumentoIdentidadRepository
+                .findById(clienteRequest.idTipoDocumento())
+                .orElseThrow(() -> new IllegalArgumentException("Tipo de documento no encontrado"));
+
         return new Cliente(
                 clienteRequest.descripcion(),
                 clienteRequest.razonSocial(),
                 clienteRequest.nombres(),
                 clienteRequest.apellidoPaterno(),
                 clienteRequest.apellidoMaterno(),
-                clienteRequest.tipoDocumentoIdentidad(),
+                tipoDocumentoIdentidadMapper.toTipoDocumentoIdentidad(tipoDocEntity),
                 clienteRequest.numeroDocumento(),
                 clienteRequest.direccion(),
                 clienteRequest.celular(),
@@ -75,7 +91,10 @@ public class ClienteMapper {
                 .toList();
     }
 
-   public ClienteResponse toClienteResponse(Cliente cliente) {
+    public ClienteResponse toClienteResponse(Cliente cliente) {
+        if (cliente == null) {
+            return null;
+        }
         return new ClienteResponse(
                 cliente.getId(),
                 cliente.getDescripcion(),

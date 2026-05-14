@@ -5,7 +5,6 @@ import org.luis.proyecto.application.service.cliente.impl.ClienteServiceImpl;
 import org.luis.proyecto.application.usecase.cliente.*;
 import org.luis.proyecto.application.usecase.cliente.impl.*;
 import org.luis.proyecto.domain.repository.ClienteRepository;
-import org.luis.proyecto.infrastructure.mapper.ClienteMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -41,16 +40,14 @@ public class ClienteBeanConfig {
             ActualizarClienteUseCase actualizarClienteUseCase,
             EliminarClienteUseCase eliminarClienteUseCase,
             ListaClientesUseCase listaClientesUseCase,
-            ObtenerClienteUseCase obtenerClienteUseCase,
-            ClienteMapper clienteMapper
+            ObtenerClienteUseCase obtenerClienteUseCase
     ) {
         return new ClienteServiceImpl(
                 crearClienteUseCase,
                 actualizarClienteUseCase,
                 eliminarClienteUseCase,
                 listaClientesUseCase,
-                obtenerClienteUseCase,
-                clienteMapper
+                obtenerClienteUseCase
         );
     }
 

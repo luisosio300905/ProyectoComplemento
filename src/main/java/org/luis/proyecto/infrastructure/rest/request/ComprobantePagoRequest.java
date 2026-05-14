@@ -1,26 +1,18 @@
 package org.luis.proyecto.infrastructure.rest.request;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import org.luis.proyecto.domain.model.Cliente;
-import org.luis.proyecto.domain.model.TipoComprobantePago;
-
 import java.math.BigDecimal;
 
-public record ComprobantePagoRequest (
-    @NotNull
-    @NotBlank
-    Cliente cliente,
+public record ComprobantePagoRequest(
+    @NotNull(message = "Debe ingresar el ID del cliente")
+    Integer idCliente,
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "El total no puede ser nulo")
     BigDecimal total,
 
-    @NotNull
-    @NotBlank
-    TipoComprobantePago tipoComprobantePago,
+    @NotNull(message = "Debe ingresar el ID del tipo de comprobante")
+    Integer idTipoComprobante,
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "La descripción no puede ser nula")
     String descripcion
-){}
+) {}

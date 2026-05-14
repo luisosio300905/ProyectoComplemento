@@ -9,11 +9,12 @@ import java.util.List;
 public class TipoComprobantePagoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_comprobante_pago")
+    @Column(name = "id_tipo_comprobante")
     private Integer id;
+
     private String tipoComprobante;
-    @OneToMany
-    @JoinColumn(name = "id_comprobante_pago")
+
+    @OneToMany(mappedBy = "tipoComprobantePago")
     private List<ComprobantePagoEntity> comprobantesPago;
 
     public TipoComprobantePagoEntity(Integer id, String tipoComprobante, List<ComprobantePagoEntity> comprobantesPago) {

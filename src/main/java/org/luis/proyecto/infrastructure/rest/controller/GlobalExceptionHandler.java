@@ -1,5 +1,6 @@
 package org.luis.proyecto.infrastructure.rest.controller;
 
+import org.luis.proyecto.domain.exception.InsufficientPermissionException;
 import org.luis.proyecto.domain.exception.InvalidCredentialsException;
 import org.luis.proyecto.domain.exception.ResourceNotFoundException;
 import org.luis.proyecto.infrastructure.rest.response.ErrorResponse;
@@ -27,6 +28,18 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<ErrorResponse> handleInvalidCredentials(InvalidCredentialsException ex) {
+        ErrorResponse response = new ErrorResponse(
+                ex.getMessage(),
+                HttpStatus.UNAUTHORIZED.value(),
+                Instant.now()
+        );
+        return ResponseEntity
+                .status(response.status())
+                .body(response);
+    }
+
+    @ExceptionHandler(InsufficientPermissionException.class)
+    public ResponseEntity<ErrorResponse> handleInsufficientPermission(InsufficientPermissionException ex) {
         ErrorResponse response = new ErrorResponse(
                 ex.getMessage(),
                 HttpStatus.UNAUTHORIZED.value(),

@@ -1,16 +1,17 @@
 package org.luis.proyecto.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
-import org.luis.proyecto.domain.model.ComprobantePago;
-import org.luis.proyecto.domain.model.TipoDocumentoIdentidad;
 
 import java.util.List;
+
+// ...existing code...
 
 @Entity
 @Table(name = "clientes")
 public class ClienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private Integer id;
     private String descripcion;
     private String razonSocial;
@@ -18,6 +19,7 @@ public class ClienteEntity {
     private String apellidoPaterno;
     private String apellidoMaterno;
     @ManyToOne
+    @JoinColumn(name = "id_tipo_documento")
     private TipoDocumentoIdentidadEntity tipoDocumentoIdentidad;
     private String numeroDocumento;
     private String direccion;

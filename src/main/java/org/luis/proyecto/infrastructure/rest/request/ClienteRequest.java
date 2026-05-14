@@ -4,7 +4,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.luis.proyecto.domain.model.TipoDocumentoIdentidad;
 
 
 public record ClienteRequest(
@@ -23,10 +22,10 @@ public record ClienteRequest(
         @NotNull
         @NotBlank(message = "Debe ingresar el apellido materno")
         String apellidoMaterno,
-        @NotNull(message = "Debe ingresar el tipo de documento")
-        TipoDocumentoIdentidad tipoDocumentoIdentidad,
+        @NotNull(message = "Debe ingresar el id del tipo de documento")
+        Integer idTipoDocumento,
         @NotNull
-        @NotBlank(message = "Debe ingresar la direccion")
+        @NotBlank(message = "Debe ingresar el número de documento")
         String numeroDocumento,
         @NotNull
         @NotBlank(message = "Debe ingresar una direccion")

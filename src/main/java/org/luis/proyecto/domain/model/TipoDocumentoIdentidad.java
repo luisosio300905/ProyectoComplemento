@@ -4,6 +4,9 @@ public class TipoDocumentoIdentidad {
     private Integer id;
     private String nombre;
 
+    public TipoDocumentoIdentidad() {
+    }
+
     public TipoDocumentoIdentidad(Integer id, String nombre) {
         this.id = id;
         this.nombre = nombre;

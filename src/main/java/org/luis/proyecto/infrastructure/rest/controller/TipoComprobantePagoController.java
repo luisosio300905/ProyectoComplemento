@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tipos-comprobante")
+@RequestMapping("/api/tiposcomprobante")
 public class TipoComprobantePagoController {
     private final TipoComprobantePagoService tipoComprobantePagoService;
     private final TipoComprobantePagoMapper tipoComprobantePagoMapper;

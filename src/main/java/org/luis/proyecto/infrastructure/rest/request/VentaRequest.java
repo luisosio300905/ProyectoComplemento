@@ -4,15 +4,16 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 public record VentaRequest(
-    @Size(min = 0)
-    int id,
-    @NotNull
+    @NotNull(message = "La fecha no puede ser nula")
     LocalDateTime fecha,
-    @Size(min = 0)
-    BigDecimal total
+
+    @NotNull(message = "El total no puede ser nulo")
+    BigDecimal total,
+
+    @NotNull(message = "Debe ingresar el ID del comprobante de pago")
+    Integer idComprobantePago
 ) {
     
 }

@@ -1,12 +1,9 @@
 package org.luis.proyecto.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.luis.proyecto.domain.model.Cliente;
-import org.luis.proyecto.domain.model.TipoComprobantePago;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "comprobantes_pago")
@@ -20,9 +17,11 @@ public class ComprobantePagoEntity {
     private ClienteEntity cliente;
     private BigDecimal total;
     @ManyToOne
-    @JoinColumn(name = "id_tipo_comprobante_pago")
+    @JoinColumn(name = "id_tipo_comprobante")
     private TipoComprobantePagoEntity tipoComprobantePago;
     private String descripcion;
+    @OneToMany(mappedBy = "comprobantePago")
+    private List<VentaEntity> ventas;
 
     public ComprobantePagoEntity(Integer id, ClienteEntity cliente, BigDecimal total, TipoComprobantePagoEntity tipoComprobantePago, String descripcion) {
         this.id = id;
@@ -33,9 +32,6 @@ public class ComprobantePagoEntity {
     }
 
     public ComprobantePagoEntity() {
-    }
-
-    public ComprobantePagoEntity(@NotNull @NotBlank Cliente cliente, @NotNull @NotBlank BigDecimal total, @NotNull @NotBlank TipoComprobantePago tipoComprobantePago, @NotNull @NotBlank String descripcion) {
     }
 
     public Integer getId() {
@@ -76,5 +72,13 @@ public class ComprobantePagoEntity {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<VentaEntity> getVentas() {
+        return ventas;
+    }
+
+    public void setVentas(List<VentaEntity> ventas) {
+        this.ventas = ventas;
     }
 }
