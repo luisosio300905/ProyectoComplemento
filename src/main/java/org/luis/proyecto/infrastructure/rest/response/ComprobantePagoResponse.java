@@ -1,13 +1,11 @@
 package org.luis.proyecto.infrastructure.rest.response;
 
-import org.luis.proyecto.domain.model.Cliente;
-import org.luis.proyecto.domain.model.TipoComprobantePago;
-
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public record ComprobantePagoResponse(
-        Cliente cliente,
-        BigDecimal total,
-        TipoComprobantePago tipoComprobantePago,
-        String descripcion
+        String id,
+        String comPagDescripcion,
+        String usrSistema,
+        LocalDateTime fecSistema,
+        String hrsSistema
 ){ }

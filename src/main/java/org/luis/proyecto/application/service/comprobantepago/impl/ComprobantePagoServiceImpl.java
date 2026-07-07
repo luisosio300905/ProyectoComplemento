@@ -28,17 +28,17 @@ public class ComprobantePagoServiceImpl implements ComprobantePagoService {
     }
 
     @Override
-    public ComprobantePago actualizar(Integer id, ComprobantePago comprobantePago) {
+    public ComprobantePago actualizar(String id, ComprobantePago comprobantePago) {
         return actualizarComprobantePagoUseCase.actualizar(id, comprobantePago);
     }
 
     @Override
-    public void eliminar(Integer id) {
+    public void eliminar(String id) {
         eliminarComprobantePagoUseCase.eliminar(id);
     }
 
     @Override
-    public ComprobantePago obtenerComprobantePago(Integer id) {
+    public ComprobantePago obtenerComprobantePago(String id) {
         return obtenerComprobantePagoUseCase.obtenerComprobantePago(id);
     }
 

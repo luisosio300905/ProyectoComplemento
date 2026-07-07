@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ComprobantePagoService {
     ComprobantePago crear(ComprobantePago comprobantePago);
-    ComprobantePago actualizar(Integer id, ComprobantePago comprobantePago);
-    void eliminar(Integer id);
-    ComprobantePago obtenerComprobantePago(Integer id);
+    ComprobantePago actualizar(String id, ComprobantePago comprobantePago);
+    void eliminar(String id);
+    ComprobantePago obtenerComprobantePago(String id);
     List<ComprobantePago> obtenerTodos();
 }

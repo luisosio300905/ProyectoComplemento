@@ -19,11 +19,13 @@ public class TipoComprobantePagoMapper {
     }
 
     public TipoComprobantePagoEntity toTipoComprobantePagoEntity(TipoComprobantePago tipoComprobantePago) {
-        return new TipoComprobantePagoEntity(
-                tipoComprobantePago.getId(),
-                tipoComprobantePago.getTipoComprobante(),
-                null
+        TipoComprobantePagoEntity entity = new TipoComprobantePagoEntity(
+                tipoComprobantePago.getTipoComprobante()
         );
+        if (tipoComprobantePago.getId() != null) {
+            entity.setId(tipoComprobantePago.getId());
+        }
+        return entity;
     }
 
     public TipoComprobantePago toTipoComprobantePago(TipoComprobantePagoRequest request) {

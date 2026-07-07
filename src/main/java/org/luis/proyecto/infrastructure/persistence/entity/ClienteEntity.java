@@ -1,144 +1,147 @@
 package org.luis.proyecto.infrastructure.persistence.entity;
-
 import jakarta.persistence.*;
-
-import java.util.List;
-
-// ...existing code...
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "Cliente")
 public class ClienteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente")
+    @Column(name = "ClienId")
     private Integer id;
-    private String descripcion;
-    private String razonSocial;
-    private String nombres;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
-    @ManyToOne
-    @JoinColumn(name = "id_tipo_documento")
+
+    @Column(name = "ClienDescripcion")
+    private String clienDescripcion;
+
+    @Column(name = "ClienRazSoc")
+    private String clienRazSoc;
+
+    @Column(name = "ClienNomCor")
+    private String clienNomCor;
+
+    @Column(name = "ClienSiglas")
+    private String clienSiglas;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "TipDocIdenId")
     private TipoDocumentoIdentidadEntity tipoDocumentoIdentidad;
-    private String numeroDocumento;
-    private String direccion;
-    private String celular;
-    private String correo;
-    @OneToMany(mappedBy = "cliente")
-    private List<ComprobantePagoEntity> comprobantes;
 
-    public ClienteEntity(Integer id,String descripcion, String razonSocial, String nombres, String apellidoPaterno, String apellidoMaterno, TipoDocumentoIdentidadEntity tipoDocumentoIdentidad, String numeroDocumento, String direccion, String celular, String correo, List<ComprobantePagoEntity> comprobantes) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.razonSocial = razonSocial;
-        this.nombres = nombres;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-        this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
-        this.numeroDocumento = numeroDocumento;
-        this.direccion = direccion;
-        this.celular = celular;
-        this.correo = correo;
-        this.comprobantes = comprobantes;
-    }
+    @Column(name = "ClienDoc")
+    private String clienDoc;
 
-    public ClienteEntity() {
-    }
+    @Column(name = "ClienRegCom")
+    private String clienRegCom;
 
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "ClienDireccion")
+    private String clienDireccion;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @Column(name = "ClienTelef01")
+    private String clienTelef01;
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+    @Column(name = "ClienTelef02")
+    private String clienTelef02;
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    @Column(name = "ClienFax")
+    private String clienFax;
 
-    public String getRazonSocial() {
-        return razonSocial;
-    }
+    @Column(name = "ClienCelular")
+    private String clienCelular;
 
-    public void setRazonSocial(String razonSocial) {
-        this.razonSocial = razonSocial;
-    }
+    @Column(name = "ClienMail")
+    private String clienMail;
 
-    public String getNombres() {
-        return nombres;
-    }
+    @Column(name = "ClienWeb")
+    private String clienWeb;
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
+    @Column(name = "ClienContacto")
+    private String clienContacto;
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
+    @Column(name = "ClienFecIng")
+    private LocalDateTime clienFecIng;
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
+    @Column(name = "ClienEstado")
+    private String clienEstado;
 
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
+    @Column(name = "ClienGiro")
+    private String clienGiro;
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
+    @Column(name = "ClienUltVta")
+    private LocalDateTime clienUltVta;
 
-    public TipoDocumentoIdentidadEntity getTipoDocumentoIdentidad() {
-        return tipoDocumentoIdentidad;
-    }
+    @Column(name = "CtaCteId")
+    private Long ctaCteId;
 
-    public void setTipoDocumentoIdentidad(TipoDocumentoIdentidadEntity tipoDocumentoIdentidad) {
-        this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
-    }
+    @Column(name = "DptoGeoId")
+    private String dptoGeoId;
 
-    public String getNumeroDocumento() {
-        return numeroDocumento;
-    }
+    @Column(name = "ProvGeoId")
+    private String provGeoId;
 
-    public void setNumeroDocumento(String numeroDocumento) {
-        this.numeroDocumento = numeroDocumento;
-    }
+    @Column(name = "DistGeoId")
+    private String distGeoId;
 
-    public String getDireccion() {
-        return direccion;
-    }
+    @Column(name = "UsrSistema")
+    private String usrSistema;
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+    @Column(name = "FecSistema")
+    private LocalDateTime fecSistema;
 
-    public String getCelular() {
-        return celular;
-    }
+    @Column(name = "HrsSistema")
+    private String hrsSistema;
 
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public List<ComprobantePagoEntity> getComprobantes() {
-        return comprobantes;
-    }
-
-    public void setComprobantes(List<ComprobantePagoEntity> comprobantes) {
-        this.comprobantes = comprobantes;
-    }
+    public ClienteEntity() {}
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
+    public String getClienDescripcion() { return clienDescripcion; }
+    public void setClienDescripcion(String clienDescripcion) { this.clienDescripcion = clienDescripcion; }
+    public String getClienRazSoc() { return clienRazSoc; }
+    public void setClienRazSoc(String clienRazSoc) { this.clienRazSoc = clienRazSoc; }
+    public String getClienNomCor() { return clienNomCor; }
+    public void setClienNomCor(String clienNomCor) { this.clienNomCor = clienNomCor; }
+    public String getClienSiglas() { return clienSiglas; }
+    public void setClienSiglas(String clienSiglas) { this.clienSiglas = clienSiglas; }
+    public TipoDocumentoIdentidadEntity getTipoDocumentoIdentidad() { return tipoDocumentoIdentidad; }
+    public void setTipoDocumentoIdentidad(TipoDocumentoIdentidadEntity tipoDocumentoIdentidad) { this.tipoDocumentoIdentidad = tipoDocumentoIdentidad; }
+    public String getClienDoc() { return clienDoc; }
+    public void setClienDoc(String clienDoc) { this.clienDoc = clienDoc; }
+    public String getClienRegCom() { return clienRegCom; }
+    public void setClienRegCom(String clienRegCom) { this.clienRegCom = clienRegCom; }
+    public String getClienDireccion() { return clienDireccion; }
+    public void setClienDireccion(String clienDireccion) { this.clienDireccion = clienDireccion; }
+    public String getClienTelef01() { return clienTelef01; }
+    public void setClienTelef01(String clienTelef01) { this.clienTelef01 = clienTelef01; }
+    public String getClienTelef02() { return clienTelef02; }
+    public void setClienTelef02(String clienTelef02) { this.clienTelef02 = clienTelef02; }
+    public String getClienFax() { return clienFax; }
+    public void setClienFax(String clienFax) { this.clienFax = clienFax; }
+    public String getClienCelular() { return clienCelular; }
+    public void setClienCelular(String clienCelular) { this.clienCelular = clienCelular; }
+    public String getClienMail() { return clienMail; }
+    public void setClienMail(String clienMail) { this.clienMail = clienMail; }
+    public String getClienWeb() { return clienWeb; }
+    public void setClienWeb(String clienWeb) { this.clienWeb = clienWeb; }
+    public String getClienContacto() { return clienContacto; }
+    public void setClienContacto(String clienContacto) { this.clienContacto = clienContacto; }
+    public LocalDateTime getClienFecIng() { return clienFecIng; }
+    public void setClienFecIng(LocalDateTime clienFecIng) { this.clienFecIng = clienFecIng; }
+    public String getClienEstado() { return clienEstado; }
+    public void setClienEstado(String clienEstado) { this.clienEstado = clienEstado; }
+    public String getClienGiro() { return clienGiro; }
+    public void setClienGiro(String clienGiro) { this.clienGiro = clienGiro; }
+    public LocalDateTime getClienUltVta() { return clienUltVta; }
+    public void setClienUltVta(LocalDateTime clienUltVta) { this.clienUltVta = clienUltVta; }
+    public Long getCtaCteId() { return ctaCteId; }
+    public void setCtaCteId(Long ctaCteId) { this.ctaCteId = ctaCteId; }
+    public String getDptoGeoId() { return dptoGeoId; }
+    public void setDptoGeoId(String dptoGeoId) { this.dptoGeoId = dptoGeoId; }
+    public String getProvGeoId() { return provGeoId; }
+    public void setProvGeoId(String provGeoId) { this.provGeoId = provGeoId; }
+    public String getDistGeoId() { return distGeoId; }
+    public void setDistGeoId(String distGeoId) { this.distGeoId = distGeoId; }
+    public String getUsrSistema() { return usrSistema; }
+    public void setUsrSistema(String usrSistema) { this.usrSistema = usrSistema; }
+    public LocalDateTime getFecSistema() { return fecSistema; }
+    public void setFecSistema(LocalDateTime fecSistema) { this.fecSistema = fecSistema; }
+    public String getHrsSistema() { return hrsSistema; }
+    public void setHrsSistema(String hrsSistema) { this.hrsSistema = hrsSistema; }
 }

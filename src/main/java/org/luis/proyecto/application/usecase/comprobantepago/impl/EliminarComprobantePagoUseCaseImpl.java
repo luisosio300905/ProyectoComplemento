@@ -11,7 +11,7 @@ public class EliminarComprobantePagoUseCaseImpl implements EliminarComprobantePa
     }
 
     @Override
-    public void eliminar(Integer id) {
+    public void eliminar(String id) {
         comprobantePagoRepository.deleteById(id);
     }
 }

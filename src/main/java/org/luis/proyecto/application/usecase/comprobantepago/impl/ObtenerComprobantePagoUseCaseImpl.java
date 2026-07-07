@@ -13,7 +13,7 @@ public class ObtenerComprobantePagoUseCaseImpl implements ObtenerComprobantePago
     }
 
     @Override
-    public ComprobantePago obtenerComprobantePago(Integer id) {
+    public ComprobantePago obtenerComprobantePago(String id) {
         return comprobantePagoRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Comprobante de pago no encontrado"));

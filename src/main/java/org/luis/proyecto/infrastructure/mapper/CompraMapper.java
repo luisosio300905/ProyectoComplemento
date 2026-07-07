@@ -39,7 +39,7 @@ public class CompraMapper {
                 compraEntity.getFecha(),
                 compraEntity.getTotal(),
                 proveedorMapper.toProveedor(compraEntity.getProveedor()),
-                comprobantePagoMapper.toComprobantePago(compraEntity.getComprobantePago())
+                comprobantePagoMapper.toDomain(compraEntity.getComprobantePago())
         );
     }
 
@@ -53,7 +53,7 @@ public class CompraMapper {
                 compra.getFecha(),
                 compra.getTotal(),
                 proveedorMapper.toProveedorEntity(compra.getProveedor()),
-                comprobantePagoMapper.toComprobantePagoEntity(compra.getComprobantePago())
+                comprobantePagoMapper.toEntity(compra.getComprobantePago())
         );
     }
 
@@ -74,7 +74,7 @@ public class CompraMapper {
                 compraRequest.fecha(),
                 compraRequest.total(),
                 proveedorMapper.toProveedor(proveedorEntity),
-                comprobantePagoMapper.toComprobantePago(comprobantePagoEntity)
+                comprobantePagoMapper.toDomain(comprobantePagoEntity)
         );
     }
 
@@ -106,4 +106,3 @@ public class CompraMapper {
                 .toList();
     }
 }
-

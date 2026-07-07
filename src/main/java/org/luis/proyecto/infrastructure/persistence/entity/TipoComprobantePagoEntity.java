@@ -14,13 +14,9 @@ public class TipoComprobantePagoEntity {
 
     private String tipoComprobante;
 
-    @OneToMany(mappedBy = "tipoComprobantePago")
-    private List<ComprobantePagoEntity> comprobantesPago;
-
     public TipoComprobantePagoEntity(Integer id, String tipoComprobante, List<ComprobantePagoEntity> comprobantesPago) {
         this.id = id;
         this.tipoComprobante = tipoComprobante;
-        this.comprobantesPago = comprobantesPago;
     }
 
     public TipoComprobantePagoEntity(String tipoComprobante) {
@@ -44,14 +40,6 @@ public class TipoComprobantePagoEntity {
 
     public void setTipoComprobante(String tipoComprobante) {
         this.tipoComprobante = tipoComprobante;
-    }
-
-    public List<ComprobantePagoEntity> getComprobantesPago() {
-        return comprobantesPago;
-    }
-
-    public void setComprobantesPago(List<ComprobantePagoEntity> comprobantesPago) {
-        this.comprobantesPago = comprobantesPago;
     }
 
 }

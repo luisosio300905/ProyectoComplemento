@@ -1,59 +1,61 @@
 package org.luis.proyecto.infrastructure.rest.controller;
-
-import org.luis.proyecto.application.service.producto.ProductoService;
+import jakarta.validation.Valid;
+import org.luis.proyecto.application.usecase.producto.*;
 import org.luis.proyecto.infrastructure.mapper.ProductoMapper;
 import org.luis.proyecto.infrastructure.rest.request.ProductoRequest;
 import org.luis.proyecto.infrastructure.rest.response.ProductoResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
+import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/productos")
 public class ProductoController {
-    private final ProductoService productoService;
+    private final CrearProductoUseCase crearProductoUseCase;
+    private final ListarProductosUseCase listarProductosUseCase;
+    private final ObtenerProductoUseCase obtenerProductoUseCase;
+    private final EliminarProductoUseCase eliminarProductoUseCase;
+    private final ActualizarProductoUseCase actualizarProductoUseCase;
     private final ProductoMapper productoMapper;
-
-    public ProductoController(ProductoService productoService, ProductoMapper productoMapper) {
-        this.productoService = productoService;
+    public ProductoController(CrearProductoUseCase crearProductoUseCase,
+                              ListarProductosUseCase listarProductosUseCase,
+                              ObtenerProductoUseCase obtenerProductoUseCase,
+                              EliminarProductoUseCase eliminarProductoUseCase,
+                              ActualizarProductoUseCase actualizarProductoUseCase,
+                              ProductoMapper productoMapper) {
+        this.crearProductoUseCase = crearProductoUseCase;
+        this.listarProductosUseCase = listarProductosUseCase;
+        this.obtenerProductoUseCase = obtenerProductoUseCase;
+        this.eliminarProductoUseCase = eliminarProductoUseCase;
+        this.actualizarProductoUseCase = actualizarProductoUseCase;
         this.productoMapper = productoMapper;
     }
-
-    @GetMapping("")
-    public ResponseEntity<List<ProductoResponse>> getProductos() {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(productoMapper.toProductoResponseList(productoService.obtenerTodos()));
+    @GetMapping
+    public ResponseEntity<List<ProductoResponse>> listar() {
+        List<ProductoResponse> responses = listarProductosUseCase.listar().stream()
+            .map(productoMapper::toResponse).collect(Collectors.toList());
+        return ResponseEntity.ok(responses);
     }
-
-    @PostMapping("")
-    public ResponseEntity<ProductoResponse> createProducto(@RequestBody ProductoRequest productoRequest) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(productoMapper.toProductoResponse(
-                        productoService.crear(productoMapper.toProducto(productoRequest))));
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<ProductoResponse> getProducto(@PathVariable Integer id) {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(productoMapper.toProductoResponse(productoService.obtenerProducto(id)));
+    public ResponseEntity<ProductoResponse> obtenerPorId(@PathVariable Integer id) {
+        return obtenerProductoUseCase.obtenerPorId(id)
+                .map(producto -> ResponseEntity.ok(productoMapper.toResponse(producto)))
+                .orElse(ResponseEntity.notFound().build());
     }
-
+    @PostMapping
+    public ResponseEntity<ProductoResponse> crear(@Valid @RequestBody ProductoRequest request) {
+        var producto = crearProductoUseCase.crear(productoMapper.toDomain(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(productoMapper.toResponse(producto));
+    }
     @PutMapping("/{id}")
-    public ResponseEntity<ProductoResponse> updateProducto(@PathVariable Integer id, @RequestBody ProductoRequest productoRequest) {
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(productoMapper.toProductoResponse(
-                        productoService.actualizar(id, productoMapper.toProducto(productoRequest))));
+    public ResponseEntity<ProductoResponse> actualizar(@PathVariable Integer id, @Valid @RequestBody ProductoRequest request) {
+        var producto = actualizarProductoUseCase.actualizar(id, productoMapper.toDomain(request));
+        return ResponseEntity.ok(productoMapper.toResponse(producto));
     }
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
-        productoService.eliminar(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
+        eliminarProductoUseCase.eliminar(id);
+        return ResponseEntity.noContent().build();
     }
 }

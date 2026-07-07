@@ -16,7 +16,7 @@ public record CompraRequest(
     Integer idProveedor,
 
     @NotNull(message = "Debe ingresar el ID del comprobante de pago")
-    Integer idComprobantePago
+    String idComprobantePago
 ) {
 }
 

@@ -1,84 +1,43 @@
 package org.luis.proyecto.infrastructure.persistence.entity;
 
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "comprobantes_pago")
+@Table(name = "ComprobantePago")
 public class ComprobantePagoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_comprobante_pago")
-    private Integer id;
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private ClienteEntity cliente;
-    private BigDecimal total;
-    @ManyToOne
-    @JoinColumn(name = "id_tipo_comprobante")
-    private TipoComprobantePagoEntity tipoComprobantePago;
-    private String descripcion;
-    @OneToMany(mappedBy = "comprobantePago")
-    private List<VentaEntity> ventas;
+    @Column(name = "ComPagId", length = 50)
+    private String id;
 
-    public ComprobantePagoEntity(Integer id, ClienteEntity cliente, BigDecimal total, TipoComprobantePagoEntity tipoComprobantePago, String descripcion) {
-        this.id = id;
-        this.cliente = cliente;
-        this.total = total;
-        this.tipoComprobantePago = tipoComprobantePago;
-        this.descripcion = descripcion;
-    }
+    @Column(name = "ComPagDescripcion")
+    private String comPagDescripcion;
 
-    public ComprobantePagoEntity() {
-    }
+    @Column(name = "UsrSistema")
+    private String usrSistema;
 
-    public Integer getId() {
-        return id;
-    }
+    @Column(name = "FecSistema")
+    private LocalDateTime fecSistema;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @Column(name = "HrsSistema")
+    private String hrsSistema;
 
-    public ClienteEntity getCliente() {
-        return cliente;
-    }
+    @OneToMany(mappedBy = "comprobantePago", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DocumentoEntity> documentos;
 
-    public void setCliente(ClienteEntity cliente) {
-        this.cliente = cliente;
-    }
+    public ComprobantePagoEntity() {}
 
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public TipoComprobantePagoEntity getTipoComprobantePago() {
-        return tipoComprobantePago;
-    }
-
-    public void setTipoComprobantePago(TipoComprobantePagoEntity tipoComprobantePago) {
-        this.tipoComprobantePago = tipoComprobantePago;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public List<VentaEntity> getVentas() {
-        return ventas;
-    }
-
-    public void setVentas(List<VentaEntity> ventas) {
-        this.ventas = ventas;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getComPagDescripcion() { return comPagDescripcion; }
+    public void setComPagDescripcion(String comPagDescripcion) { this.comPagDescripcion = comPagDescripcion; }
+    public String getUsrSistema() { return usrSistema; }
+    public void setUsrSistema(String usrSistema) { this.usrSistema = usrSistema; }
+    public LocalDateTime getFecSistema() { return fecSistema; }
+    public void setFecSistema(LocalDateTime fecSistema) { this.fecSistema = fecSistema; }
+    public String getHrsSistema() { return hrsSistema; }
+    public void setHrsSistema(String hrsSistema) { this.hrsSistema = hrsSistema; }
+    public List<DocumentoEntity> getDocumentos() { return documentos; }
+    public void setDocumentos(List<DocumentoEntity> documentos) { this.documentos = documentos; }
 }

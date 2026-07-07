@@ -1,68 +1,38 @@
 package org.luis.proyecto.domain.model;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class ComprobantePago {
-    private Integer id;
-    private Cliente cliente;
-    private BigDecimal total;
-    private TipoComprobantePago tipoComprobantePago;
-    private String descripcion;
+    private String id;
+    private String comPagDescripcion;
+    private String usrSistema;
+    private LocalDateTime fecSistema;
+    private String hrsSistema;
 
-    public ComprobantePago(Integer id, Cliente cliente, BigDecimal total, TipoComprobantePago tipoComprobantePago, String descripcion) {
-        this.id = id;
-        this.cliente = cliente;
-        this.total = total;
-        this.tipoComprobantePago = tipoComprobantePago;
-        this.descripcion = descripcion;
-    }
+    public ComprobantePago() {}
 
-    public ComprobantePago(Cliente cliente, BigDecimal total, TipoComprobantePago tipoComprobantePago, String descripcion) {
-        this.cliente = cliente;
-        this.total = total;
-        this.tipoComprobantePago = tipoComprobantePago;
-        this.descripcion = descripcion;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
+    public ComprobantePago(String id) {
         this.id = id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public ComprobantePago(String id, String comPagDescripcion, String usrSistema, LocalDateTime fecSistema, String hrsSistema) {
+        this.id = id;
+        this.comPagDescripcion = comPagDescripcion;
+        this.usrSistema = usrSistema;
+        this.fecSistema = fecSistema;
+        this.hrsSistema = hrsSistema;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public TipoComprobantePago getTipoComprobantePago() {
-        return tipoComprobantePago;
-    }
-
-    public void setTipoComprobantePago(TipoComprobantePago tipoComprobantePago) {
-        this.tipoComprobantePago = tipoComprobantePago;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
+    public String getComPagDescripcion() { return comPagDescripcion; }
+    public void setComPagDescripcion(String comPagDescripcion) { this.comPagDescripcion = comPagDescripcion; }
+    public String getUsrSistema() { return usrSistema; }
+    public void setUsrSistema(String usrSistema) { this.usrSistema = usrSistema; }
+    public LocalDateTime getFecSistema() { return fecSistema; }
+    public void setFecSistema(LocalDateTime fecSistema) { this.fecSistema = fecSistema; }
+    public String getHrsSistema() { return hrsSistema; }
+    public void setHrsSistema(String hrsSistema) { this.hrsSistema = hrsSistema; }
 }
 
 

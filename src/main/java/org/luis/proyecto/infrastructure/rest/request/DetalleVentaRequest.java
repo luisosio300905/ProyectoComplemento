@@ -1,17 +1,28 @@
 package org.luis.proyecto.infrastructure.rest.request;
-
-import jakarta.validation.constraints.NotNull;
-import org.luis.proyecto.domain.model.Producto;
-import org.luis.proyecto.domain.model.Venta;
 import java.math.BigDecimal;
-
-public record DetalleVentaRequest (
-        @NotNull
-        Venta venta,
-
-        @NotNull
-        Producto producto,
-
-        @NotNull
-        BigDecimal subTotal
-){}
+import java.time.LocalDateTime;
+public record DetalleVentaRequest(
+    Integer idVenta,
+    String empresaId,
+    Integer unidComId,
+    String docId,
+    String vtaCabNumComp,
+    Integer iteAlmId,
+    Integer vtaDetCodref,
+    String vtaDetItem,
+    BigDecimal vtaDetCantidad,
+    BigDecimal vtaDetPrecUnit,
+    BigDecimal vtaDetValorVta,
+    BigDecimal vtaDetValIGV,
+    BigDecimal vtaDetValISC,
+    BigDecimal vtaDetValTot,
+    Integer tipVtaId,
+    Integer tipAlmId,
+    Integer almacenId,
+    Integer vtaDetFracUni,
+    Integer vtaDetCantFrac,
+    String usrSistema,
+    LocalDateTime fecSistema,
+    String hrsSistema,
+    BigDecimal vtaDetValIna
+) {}

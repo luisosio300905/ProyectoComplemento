@@ -1,13 +1,46 @@
 package org.luis.proyecto.infrastructure.rest.response;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public record ProductoResponse(
-        Integer id,
-        String nombre,
-        String codigo,
-        String descripcion,
-        String categoria,
-        BigDecimal precio,
-        int stock
+        String grpAlmId,
+        String clsAlmId,
+        Integer iteAlmId,
+        String iteAlmCodBarra,
+        Integer labId,
+        Integer famId,
+        Integer comGenId,
+        String iteAlmDescDetalle,
+        String iteAlmDescResumen,
+        String iteAlmUso,
+        String iteAlmUniMed,
+        String iteAlmCtaCompra,
+        String iteAlmCtaEntMat,
+        String iteAlmCtaExist,
+        BigDecimal iteAlmPrecio,
+        Integer monedaId,
+        LocalDateTime iteAlmUltFecAdq,
+        Boolean iteAlmEstado,
+        LocalDateTime iteAlmFecBaja,
+        BigDecimal iteAlmStockMin,
+        BigDecimal iteAlmTasIGV,
+        BigDecimal iteAlmTasISC,
+        Boolean iteAlmControlado,
+        Integer iteAlmFraccUni,
+        BigDecimal iteAlmCosPro,
+        BigDecimal iteAlmDscto,
+        BigDecimal iteAlmDsctoAdi,
+        BigDecimal iteAlmUtilidadVta,
+        BigDecimal iteAlmUtilidadSug,
+        BigDecimal iteAlmPVPF,
+        BigDecimal iteAlmPreVta,
+        BigDecimal iteAlmValorVtaFar,
+        LocalDateTime iteAlmFecVen,
+        String codpro,
+        Boolean itemAlmCtrlAdm,
+        String unidMedId,
+        String usrSistema,
+        LocalDateTime fecSistema,
+        String hrsSistema
 ) {}

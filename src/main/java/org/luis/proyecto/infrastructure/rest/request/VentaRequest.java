@@ -1,19 +1,36 @@
 package org.luis.proyecto.infrastructure.rest.request;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-import jakarta.validation.constraints.NotNull;
-
 public record VentaRequest(
-    @NotNull(message = "La fecha no puede ser nula")
-    LocalDateTime fecha,
-
-    @NotNull(message = "El total no puede ser nulo")
-    BigDecimal total,
-
-    @NotNull(message = "Debe ingresar el ID del comprobante de pago")
-    Integer idComprobantePago
-) {
-    
-}
+    String empresaId,
+    Integer unidComId,
+    String docId,
+    String vtaCabNumComp,
+    Long clienId,
+    Integer monedaId,
+    LocalDateTime vtaCabFecha,
+    BigDecimal vtaValCamb,
+    String vtaCabAccImp,
+    String vtaComAccAnu,
+    Integer condComId,
+    String vtaCabEstCanc,
+    String vtaCabCierre,
+    String vtaCabActPlla,
+    String vtaCabAfecDetrac,
+    String vtaCabContDetrac,
+    Integer tipOpeComId,
+    Long vtaCabNumRef,
+    BigDecimal vtaCabValorVta,
+    BigDecimal vtaCabValorVtaExo,
+    BigDecimal vtaCabValIGV,
+    BigDecimal vtaCabValISC,
+    BigDecimal vtaCabValTotal,
+    BigDecimal vtaCabValMonPago,
+    BigDecimal vtaCabValVuelto,
+    String vtaCabNamePaciente,
+    String usrSistema,
+    LocalDateTime fecSistema,
+    String hrsSistema,
+    BigDecimal vtaCabDsctoGlobal,
+    LocalDateTime vtaCabFechaVcto
+) {}

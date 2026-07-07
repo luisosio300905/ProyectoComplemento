@@ -1,11 +1,28 @@
 package org.luis.proyecto.infrastructure.rest.response;
-
-import org.luis.proyecto.domain.model.Producto;
-import org.luis.proyecto.domain.model.Venta;
 import java.math.BigDecimal;
-
+import java.time.LocalDateTime;
 public record DetalleVentaResponse(
-        Venta venta,
-        Producto producto,
-        BigDecimal subTotal
-){ }
+    Integer id,
+    String empresaId,
+    Integer unidComId,
+    String docId,
+    String vtaCabNumComp,
+    Integer iteAlmId,
+    Integer vtaDetCodref,
+    String vtaDetItem,
+    BigDecimal vtaDetCantidad,
+    BigDecimal vtaDetPrecUnit,
+    BigDecimal vtaDetValorVta,
+    BigDecimal vtaDetValIGV,
+    BigDecimal vtaDetValISC,
+    BigDecimal vtaDetValTot,
+    Integer tipVtaId,
+    Integer tipAlmId,
+    Integer almacenId,
+    Integer vtaDetFracUni,
+    Integer vtaDetCantFrac,
+    String usrSistema,
+    LocalDateTime fecSistema,
+    String hrsSistema,
+    BigDecimal vtaDetValIna
+) {}

@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ComprobantePagoRepository {
     ComprobantePago save(ComprobantePago comprobantePago);
-    void deleteById(Integer id);
-    Optional<ComprobantePago> findById(Integer id);
+    void deleteById(String id);
+    Optional<ComprobantePago> findById(String id);
     List<ComprobantePago> findAll();
 }

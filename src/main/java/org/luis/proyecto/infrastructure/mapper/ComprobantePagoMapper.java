@@ -1,104 +1,55 @@
 package org.luis.proyecto.infrastructure.mapper;
 
 import org.luis.proyecto.domain.model.ComprobantePago;
-import org.luis.proyecto.infrastructure.persistence.entity.ClienteEntity;
 import org.luis.proyecto.infrastructure.persistence.entity.ComprobantePagoEntity;
-import org.luis.proyecto.infrastructure.persistence.entity.TipoComprobantePagoEntity;
-import org.luis.proyecto.infrastructure.persistence.repository.JpaClienteRepository;
-import org.luis.proyecto.infrastructure.persistence.repository.JpaTipoComprobantePagoRepository;
 import org.luis.proyecto.infrastructure.rest.request.ComprobantePagoRequest;
 import org.luis.proyecto.infrastructure.rest.response.ComprobantePagoResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class ComprobantePagoMapper {
-    private final ClienteMapper clienteMapper;
-    private final TipoComprobantePagoMapper tipoComprobantePagoMapper;
-    private final JpaClienteRepository jpaClienteRepository;
-    private final JpaTipoComprobantePagoRepository jpaTipoComprobantePagoRepository;
 
-    public ComprobantePagoMapper(ClienteMapper clienteMapper,
-                                TipoComprobantePagoMapper tipoComprobantePagoMapper,
-                                JpaClienteRepository jpaClienteRepository,
-                                JpaTipoComprobantePagoRepository jpaTipoComprobantePagoRepository) {
-        this.clienteMapper = clienteMapper;
-        this.tipoComprobantePagoMapper = tipoComprobantePagoMapper;
-        this.jpaClienteRepository = jpaClienteRepository;
-        this.jpaTipoComprobantePagoRepository = jpaTipoComprobantePagoRepository;
+    public ComprobantePagoEntity toEntity(ComprobantePago domain) {
+        if (domain == null) return null;
+        ComprobantePagoEntity entity = new ComprobantePagoEntity();
+        entity.setId(domain.getId());
+        entity.setComPagDescripcion(domain.getComPagDescripcion());
+        entity.setUsrSistema(domain.getUsrSistema());
+        entity.setFecSistema(domain.getFecSistema());
+        entity.setHrsSistema(domain.getHrsSistema());
+        return entity;
     }
 
-    public ComprobantePago toComprobantePago(ComprobantePagoEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-        return new ComprobantePago(
-                entity.getId(),
-                clienteMapper.toCliente(entity.getCliente()),
-                entity.getTotal(),
-                tipoComprobantePagoMapper.toTipoComprobantePago(entity.getTipoComprobantePago()),
-                entity.getDescripcion()
-        );
+    public ComprobantePago toDomain(ComprobantePagoEntity entity) {
+        if (entity == null) return null;
+        ComprobantePago domain = new ComprobantePago();
+        domain.setId(entity.getId());
+        domain.setComPagDescripcion(entity.getComPagDescripcion());
+        domain.setUsrSistema(entity.getUsrSistema());
+        domain.setFecSistema(entity.getFecSistema());
+        domain.setHrsSistema(entity.getHrsSistema());
+        return domain;
     }
 
-    public ComprobantePagoEntity toComprobantePagoEntity(ComprobantePago comprobantePago) {
-        if (comprobantePago == null) {
-            return null;
-        }
-        return new ComprobantePagoEntity(
-                comprobantePago.getId(),
-                clienteMapper.toClienteEntity(comprobantePago.getCliente()),
-                comprobantePago.getTotal(),
-                tipoComprobantePagoMapper.toTipoComprobantePagoEntity(comprobantePago.getTipoComprobantePago()),
-                comprobantePago.getDescripcion()
-        );
+    public ComprobantePago toDomain(ComprobantePagoRequest request) {
+        if (request == null) return null;
+        ComprobantePago domain = new ComprobantePago();
+        domain.setId(request.id());
+        domain.setComPagDescripcion(request.comPagDescripcion());
+        domain.setUsrSistema(request.usrSistema());
+        domain.setFecSistema(request.fecSistema());
+        domain.setHrsSistema(request.hrsSistema());
+        return domain;
     }
 
-    public ComprobantePago toComprobantePago(ComprobantePagoRequest comprobantePagoRequest) {
-        if (comprobantePagoRequest == null) {
-            return null;
-        }
-
-        ClienteEntity clienteEntity = jpaClienteRepository
-                .findById(comprobantePagoRequest.idCliente())
-                .orElseThrow(() -> new IllegalArgumentException("Cliente no encontrado"));
-
-        TipoComprobantePagoEntity tipoComprobantePagoEntity = jpaTipoComprobantePagoRepository
-                .findById(comprobantePagoRequest.idTipoComprobante())
-                .orElseThrow(() -> new IllegalArgumentException("Tipo de comprobante no encontrado"));
-
-        return new ComprobantePago(
-                clienteMapper.toCliente(clienteEntity),
-                comprobantePagoRequest.total(),
-                tipoComprobantePagoMapper.toTipoComprobantePago(tipoComprobantePagoEntity),
-                comprobantePagoRequest.descripcion()
-        );
-    }
-
-    public List<ComprobantePago> toComprobantePagoList(List<ComprobantePagoEntity> entities) {
-        return entities
-                .stream()
-                .map(this::toComprobantePago)
-                .toList();
-    }
-
-    public ComprobantePagoResponse toComprobantePagoResponse(ComprobantePago comprobantePago) {
-        if (comprobantePago == null) {
-            return null;
-        }
+    public ComprobantePagoResponse toResponse(ComprobantePago domain) {
+        if (domain == null) return null;
         return new ComprobantePagoResponse(
-                comprobantePago.getCliente(),
-                comprobantePago.getTotal(),
-                comprobantePago.getTipoComprobantePago(),
-                comprobantePago.getDescripcion()
+            domain.getId(),
+            domain.getComPagDescripcion(),
+            domain.getUsrSistema(),
+            domain.getFecSistema(),
+            domain.getHrsSistema()
         );
-    }
-
-    public List<ComprobantePagoResponse> toComprobantePagoResponseList(List<ComprobantePago> comprobantePagos) {
-        return comprobantePagos
-                .stream()
-                .map(this::toComprobantePagoResponse)
-                .toList();
     }
 }

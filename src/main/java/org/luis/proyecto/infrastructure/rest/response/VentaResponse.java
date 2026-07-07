@@ -1,12 +1,37 @@
 package org.luis.proyecto.infrastructure.rest.response;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import org.luis.proyecto.domain.model.ComprobantePago;
-
 public record VentaResponse(
     Integer id,
-    LocalDateTime fecha,
-    BigDecimal total,
-    ComprobantePago comprobantePago
-){}
+    String empresaId,
+    Integer unidComId,
+    String docId,
+    String vtaCabNumComp,
+    Long clienId,
+    Integer monedaId,
+    LocalDateTime vtaCabFecha,
+    BigDecimal vtaValCamb,
+    String vtaCabAccImp,
+    String vtaComAccAnu,
+    Integer condComId,
+    String vtaCabEstCanc,
+    String vtaCabCierre,
+    String vtaCabActPlla,
+    String vtaCabAfecDetrac,
+    String vtaCabContDetrac,
+    Integer tipOpeComId,
+    Long vtaCabNumRef,
+    BigDecimal vtaCabValorVta,
+    BigDecimal vtaCabValorVtaExo,
+    BigDecimal vtaCabValIGV,
+    BigDecimal vtaCabValISC,
+    BigDecimal vtaCabValTotal,
+    BigDecimal vtaCabValMonPago,
+    BigDecimal vtaCabValVuelto,
+    String vtaCabNamePaciente,
+    String usrSistema,
+    LocalDateTime fecSistema,
+    String hrsSistema,
+    BigDecimal vtaCabDsctoGlobal,
+    LocalDateTime vtaCabFechaVcto
+) {}

@@ -12,16 +12,16 @@ public class ActualizarComprobantePagoUseCaseImpl implements ActualizarComproban
     }
 
     @Override
-    public ComprobantePago actualizar(Integer id, ComprobantePago comprobantePago) {
+    public ComprobantePago actualizar(String id, ComprobantePago comprobantePago) {
         ComprobantePago comprobantePagoActualizar = comprobantePagoRepository.findById(id).orElseThrow();
         actualizarComprobantePago(comprobantePagoActualizar, comprobantePago);
-        return comprobantePagoActualizar;
+        return comprobantePagoRepository.save(comprobantePagoActualizar);
     }
 
     private void actualizarComprobantePago(ComprobantePago actualizar, ComprobantePago datos){
-        actualizar.setCliente( datos.getCliente());
-        actualizar.setTotal( datos.getTotal());
-        actualizar.setTipoComprobantePago( datos.getTipoComprobantePago());
-        actualizar.setDescripcion( datos.getDescripcion());
+        actualizar.setComPagDescripcion(datos.getComPagDescripcion());
+        actualizar.setUsrSistema(datos.getUsrSistema());
+        actualizar.setFecSistema(datos.getFecSistema());
+        actualizar.setHrsSistema(datos.getHrsSistema());
     }
 }

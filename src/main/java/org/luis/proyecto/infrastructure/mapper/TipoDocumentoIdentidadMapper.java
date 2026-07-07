@@ -19,10 +19,12 @@ public class TipoDocumentoIdentidadMapper
     }
 
     public TipoDocumentoIdentidadEntity toTipoDocumentoIdentidadEntity(TipoDocumentoIdentidad tipodocumentoidentidad) {
-        return new TipoDocumentoIdentidadEntity(
-                tipodocumentoidentidad.getId(),
-                tipodocumentoidentidad.getNombre()
-        );
+        TipoDocumentoIdentidadEntity entity = new TipoDocumentoIdentidadEntity();
+        entity.setNombre(tipodocumentoidentidad.getNombre());
+        if (tipodocumentoidentidad.getId() != null) {
+            entity.setId(tipodocumentoidentidad.getId());
+        }
+        return entity;
     }
 
     public TipoDocumentoIdentidad toTipoDocumentoIdentidad(TipoDocumentoIdentidadRequest tipodocumentoidentidadRequest) {

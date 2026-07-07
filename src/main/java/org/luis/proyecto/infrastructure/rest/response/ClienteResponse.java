@@ -1,18 +1,32 @@
 package org.luis.proyecto.infrastructure.rest.response;
-
-import org.luis.proyecto.domain.model.TipoDocumentoIdentidad;
+import java.time.LocalDateTime;
 
 public record ClienteResponse(
-        Integer id,
-        String descripcion,
-        String razonSocial,
-        String nombres,
-        String apellidoPaterno,
-        String apellidoMaterno,
-        TipoDocumentoIdentidad tipoDocumentoIdentidad,
-        String numeroDocumento,
-        String direccion,
-        String celular,
-        String correo
-) {
-}
+    Integer id,
+    String clienDescripcion,
+    String clienRazSoc,
+    String clienNomCor,
+    String clienSiglas,
+    Integer tipDocIdenId,
+    String clienDoc,
+    String clienRegCom,
+    String clienDireccion,
+    String clienTelef01,
+    String clienTelef02,
+    String clienFax,
+    String clienCelular,
+    String clienMail,
+    String clienWeb,
+    String clienContacto,
+    LocalDateTime clienFecIng,
+    String clienEstado,
+    String clienGiro,
+    LocalDateTime clienUltVta,
+    Long ctaCteId,
+    String dptoGeoId,
+    String provGeoId,
+    String distGeoId,
+    String usrSistema,
+    LocalDateTime fecSistema,
+    String hrsSistema
+) {}

@@ -22,21 +22,23 @@ public class ComprobantePagoRepositoryAdapter implements ComprobantePagoReposito
 
     @Override
     public ComprobantePago save(ComprobantePago comprobantePago) {
-        return comprobantePagoMapper.toComprobantePago(jpaComprobantePagoRepository.save(comprobantePagoMapper.toComprobantePagoEntity(comprobantePago)));
+        return comprobantePagoMapper.toDomain(jpaComprobantePagoRepository.save(comprobantePagoMapper.toEntity(comprobantePago)));
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         jpaComprobantePagoRepository.deleteById(id);
     }
 
     @Override
-    public Optional<ComprobantePago> findById(Integer id) {
-        return jpaComprobantePagoRepository.findById(id).map(comprobantePagoMapper::toComprobantePago);
+    public Optional<ComprobantePago> findById(String id) {
+        return jpaComprobantePagoRepository.findById(id).map(comprobantePagoMapper::toDomain);
     }
 
     @Override
     public List<ComprobantePago> findAll() {
-        return comprobantePagoMapper.toComprobantePagoList(jpaComprobantePagoRepository.findAll());
+        return jpaComprobantePagoRepository.findAll().stream()
+               .map(comprobantePagoMapper::toDomain)
+               .toList();
     }
 }

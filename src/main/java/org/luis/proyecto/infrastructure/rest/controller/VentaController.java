@@ -19,7 +19,7 @@ import org.luis.proyecto.infrastructure.rest.request.VentaRequest;
 import org.luis.proyecto.infrastructure.rest.response.VentaResponse;
 
 @RestController
-@RequestMapping("/api/venta")
+@RequestMapping("/api/ventas")
 public class VentaController {
     private final VentaService ventaService;
     private final VentaMapper ventaMapper;
