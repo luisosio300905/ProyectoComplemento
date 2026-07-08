@@ -37,11 +37,11 @@ public class VentaController {
     }
 
     @PostMapping("")
-    public ResponseEntity<VentaResponse> createVenta(@RequestBody VentaRequest ventaRequest) {
+    public ResponseEntity<org.luis.proyecto.infrastructure.rest.response.VentaConBalanceResponse> createVenta(@RequestBody VentaRequest ventaRequest) {
+        org.luis.proyecto.infrastructure.rest.response.VentaConBalanceResponse respuesta = ventaService.crearConBalance(ventaMapper.toVenta(ventaRequest));
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(ventaMapper.toVentaResponse(
-                        ventaService.crear(ventaMapper.toVenta(ventaRequest))));
+                .body(respuesta);
     }
 
     @GetMapping("/{id}")

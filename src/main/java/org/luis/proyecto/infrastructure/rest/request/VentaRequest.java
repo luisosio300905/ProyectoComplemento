@@ -1,6 +1,7 @@
 package org.luis.proyecto.infrastructure.rest.request;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 public record VentaRequest(
     String empresaId,
     Integer unidComId,
@@ -32,5 +33,6 @@ public record VentaRequest(
     LocalDateTime fecSistema,
     String hrsSistema,
     BigDecimal vtaCabDsctoGlobal,
-    LocalDateTime vtaCabFechaVcto
+    LocalDateTime vtaCabFechaVcto,
+    List<DetalleVentaRequest> detallesVenta
 ) {}

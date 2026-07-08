@@ -1,6 +1,7 @@
 package org.luis.proyecto.infrastructure.rest.response;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 public record VentaResponse(
     Integer id,
     String empresaId,
@@ -33,5 +34,6 @@ public record VentaResponse(
     LocalDateTime fecSistema,
     String hrsSistema,
     BigDecimal vtaCabDsctoGlobal,
-    LocalDateTime vtaCabFechaVcto
+    LocalDateTime vtaCabFechaVcto,
+    List<DetalleVentaResponse> detallesVenta
 ) {}

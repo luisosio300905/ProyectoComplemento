@@ -10,7 +10,7 @@ public class VentaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_venta")
     private Integer id;
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleVentaEntity> detallesVenta;
     @Column(name = "EmpresaId")
     private String empresaId;
@@ -112,7 +112,16 @@ public class VentaEntity {
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
     public List<DetalleVentaEntity> getDetallesVenta() { return detallesVenta; }
-    public void setDetallesVenta(List<DetalleVentaEntity> detallesVenta) { this.detallesVenta = detallesVenta; }
+    public void setDetallesVenta(List<DetalleVentaEntity> detallesVenta) {
+        if (this.detallesVenta == null) {
+            this.detallesVenta = detallesVenta;
+        } else {
+            this.detallesVenta.clear();
+            if (detallesVenta != null) {
+                this.detallesVenta.addAll(detallesVenta);
+            }
+        }
+    }
     public String getEmpresaId() { return empresaId; }
     public void setEmpresaId(String empresaId) { this.empresaId = empresaId; }
     public Integer getUnidComId() { return unidComId; }

@@ -20,8 +20,11 @@ import org.springframework.context.annotation.Configuration;
 public class VentaBeanConfig {
 
     @Bean
-    public CrearVentaUseCase crearVentaUseCase(VentaRepository ventaRepository) {
-        return new CrearVentaUseCaseImpl(ventaRepository);
+    public CrearVentaUseCase crearVentaUseCase(VentaRepository ventaRepository,
+                                               org.luis.proyecto.application.usecase.diariocabecera.CrearDiarioCabeceraUseCase crearDiarioCabeceraUseCase,
+                                               org.luis.proyecto.application.usecase.diariodetalle.CrearDiarioDetalleUseCase crearDiarioDetalleUseCase,
+                                               org.luis.proyecto.application.service.mapeocuentas.MapeoVentaCuentasService mapeoVentaCuentasService) {
+        return new CrearVentaUseCaseImpl(ventaRepository, crearDiarioCabeceraUseCase, crearDiarioDetalleUseCase, mapeoVentaCuentasService);
     }
 
     @Bean
@@ -51,7 +54,8 @@ public class VentaBeanConfig {
             ActualizarVentaUseCase actualizarVentaUseCase,
             EliminarVentaUseCase eliminarVentaUseCase,
             ListaVentaUseCase listaVentasUseCase,
-            ObtenerVentaUseCase obtenerVentaUseCase
+            ObtenerVentaUseCase obtenerVentaUseCase,
+            org.luis.proyecto.application.service.balancegeneral.BalanceGeneralService balanceGeneralService
             ) {
         return new VentaServiceImpl
                 (
@@ -59,7 +63,8 @@ public class VentaBeanConfig {
                 actualizarVentaUseCase,
                 eliminarVentaUseCase,
                 listaVentasUseCase,
-                obtenerVentaUseCase
+                obtenerVentaUseCase,
+                balanceGeneralService
         );
     }
 }

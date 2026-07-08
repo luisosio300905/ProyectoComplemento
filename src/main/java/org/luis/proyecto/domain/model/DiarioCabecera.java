@@ -2,6 +2,7 @@ package org.luis.proyecto.domain.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DiarioCabecera {
@@ -21,7 +22,32 @@ public class DiarioCabecera {
     private List<DiarioDetalle> detalles;
 
     // Constructor vacío
-    public DiarioCabecera() {}
+    public DiarioCabecera() {
+        this.detalles = new ArrayList<>();
+    }
+
+    // Método para agregar un detalle a la cabecera
+    public DiarioDetalle agregarDetalle(BigDecimal monto, String tipoCuenta, String descripcion, String cuentaId, String subCtaId, String monedaId, String usuario) {
+        DiarioDetalle detalle = new DiarioDetalle();
+        detalle.setDiaCabCompId(this.diaCabCompId);
+        detalle.setCuentaId(cuentaId);
+        detalle.setSubCtaId(subCtaId);
+        detalle.setMonedaId(monedaId);
+        detalle.setUsrSistema(usuario);
+        detalle.setFecSistema(LocalDateTime.now());
+        
+        if ("DEBE".equalsIgnoreCase(tipoCuenta)) {
+            detalle.setDiaDetDebe(monto != null ? monto : BigDecimal.ZERO);
+            detalle.setDiaDetHaber(BigDecimal.ZERO);
+        } else if ("HABER".equalsIgnoreCase(tipoCuenta)) {
+            detalle.setDiaDetDebe(BigDecimal.ZERO);
+            detalle.setDiaDetHaber(monto != null ? monto : BigDecimal.ZERO);
+        }
+        
+        detalle.setDiaDetTexOpe(descripcion);
+        this.detalles.add(detalle);
+        return detalle;
+    }
 
     // Getters y Setters
     public Long getDiaCabCompId() { return diaCabCompId; }

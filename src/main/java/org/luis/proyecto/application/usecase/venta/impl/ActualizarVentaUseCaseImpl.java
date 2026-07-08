@@ -45,5 +45,6 @@ public class ActualizarVentaUseCaseImpl implements ActualizarVentaUseCase{
         venta1.setHrsSistema(venta2.getHrsSistema());
         venta1.setVtaCabDsctoGlobal(venta2.getVtaCabDsctoGlobal());
         venta1.setVtaCabFechaVcto(venta2.getVtaCabFechaVcto());
+        venta1.setDetallesVenta(venta2.getDetallesVenta());
     }
 }

@@ -8,8 +8,16 @@ import org.luis.proyecto.infrastructure.rest.response.VentaResponse;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Component
 public class VentaMapper {
+
+    private final DetalleVentaMapper detalleVentaMapper;
+
+    public VentaMapper(DetalleVentaMapper detalleVentaMapper) {
+        this.detalleVentaMapper = detalleVentaMapper;
+    }
+
     public Venta toVenta(VentaRequest request) {
         if (request == null) return null;
         Venta v = new Venta();
@@ -44,8 +52,14 @@ public class VentaMapper {
         v.setHrsSistema(request.hrsSistema());
         v.setVtaCabDsctoGlobal(request.vtaCabDsctoGlobal());
         v.setVtaCabFechaVcto(request.vtaCabFechaVcto());
+        if (request.detallesVenta() != null) {
+            v.setDetallesVenta(request.detallesVenta().stream()
+                    .map(detalleVentaMapper::toDetalleVenta)
+                    .collect(Collectors.toList()));
+        }
         return v;
     }
+
     public Venta toVenta(VentaEntity entity) {
         if (entity == null) return null;
         Venta v = new Venta();
@@ -81,8 +95,14 @@ public class VentaMapper {
         v.setHrsSistema(entity.getHrsSistema());
         v.setVtaCabDsctoGlobal(entity.getVtaCabDsctoGlobal());
         v.setVtaCabFechaVcto(entity.getVtaCabFechaVcto());
+        if (entity.getDetallesVenta() != null) {
+            v.setDetallesVenta(entity.getDetallesVenta().stream()
+                    .map(detalleVentaMapper::toDetalleVenta)
+                    .collect(Collectors.toList()));
+        }
         return v;
     }
+
     public VentaEntity toVentaEntity(Venta venta) {
         if (venta == null) return null;
         VentaEntity e = new VentaEntity();
@@ -126,13 +146,20 @@ public class VentaMapper {
         e.setHrsSistema(venta.getHrsSistema());
         e.setVtaCabDsctoGlobal(venta.getVtaCabDsctoGlobal());
         e.setVtaCabFechaVcto(venta.getVtaCabFechaVcto());
+        if (venta.getDetallesVenta() != null) {
+            e.setDetallesVenta(venta.getDetallesVenta().stream()
+                    .map(detalleVentaMapper::toDetalleVentaEntity)
+                    .collect(Collectors.toList()));
+            e.getDetallesVenta().forEach(d -> d.setVenta(e));
+        }
         return e;
     }
+
     public VentaResponse toVentaResponse(Venta venta) {
         if (venta == null) return null;
         return new VentaResponse(
             venta.getId(),
-venta.getEmpresaId(),
+            venta.getEmpresaId(),
             venta.getUnidComId(),
             venta.getDocId(),
             venta.getVtaCabNumComp(),
@@ -162,13 +189,18 @@ venta.getEmpresaId(),
             venta.getFecSistema(),
             venta.getHrsSistema(),
             venta.getVtaCabDsctoGlobal(),
-            venta.getVtaCabFechaVcto()
+            venta.getVtaCabFechaVcto(),
+            venta.getDetallesVenta() != null ? venta.getDetallesVenta().stream()
+                    .map(detalleVentaMapper::toDetalleVentaResponse)
+                    .collect(Collectors.toList()) : null
         );
     }
+
     public List<VentaResponse> toVentaResponseList(List<Venta> ventas) {
         if(ventas == null) return null;
         return ventas.stream().map(this::toVentaResponse).collect(Collectors.toList());
     }
+
     public List<Venta> toVentaList(List<VentaEntity> entities) {
         if(entities == null) return null;
         return entities.stream().map(this::toVenta).collect(Collectors.toList());
