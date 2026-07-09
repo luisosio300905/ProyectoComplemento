@@ -10,7 +10,7 @@ public class LaboratorioEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "LabId")
     private Integer id;
-    @Column(name = "LabDescripcion")
+    @Column(name = "LabDescripcion", unique = true)
     private String labDescripcion;
     @Column(name = "LabEstado")
     private Boolean labEstado;

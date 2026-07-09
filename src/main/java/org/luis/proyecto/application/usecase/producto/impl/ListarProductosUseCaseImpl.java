@@ -12,6 +12,8 @@ public class ListarProductosUseCaseImpl implements ListarProductosUseCase {
     }
     @Override
     public List<Producto> listar() {
-        return productoRepository.findAll();
+        return productoRepository.findAll().stream()
+                .filter(p -> p.getIteAlmEstado() == null || p.getIteAlmEstado())
+                .toList();
     }
 }

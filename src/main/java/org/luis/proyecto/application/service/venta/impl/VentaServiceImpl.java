@@ -50,8 +50,8 @@ public class VentaServiceImpl implements VentaService{
         // Crear la venta (internamente crea el asiento contable)
         Venta ventaCreada = crearVentaUseCase.crear(venta);
 
-        // Obtener el ID de la cabecera creada desde el ThreadLocal
-        Long diaCabCompId = CrearVentaUseCaseImpl.obtenerUltimaDiaCabCompId();
+        // Obtener el ID de la cabecera creada directamente del modelo
+        Long diaCabCompId = ventaCreada.getDiaCabCompId();
 
         VentaConBalanceResponse respuesta = null;
         if (diaCabCompId != null && balanceGeneralService != null) {
@@ -76,9 +76,6 @@ public class VentaServiceImpl implements VentaService{
                 null
             );
         }
-
-        // Limpiar el ThreadLocal
-        CrearVentaUseCaseImpl.limpiarUltimaDiaCabCompId();
 
         return respuesta;
     }

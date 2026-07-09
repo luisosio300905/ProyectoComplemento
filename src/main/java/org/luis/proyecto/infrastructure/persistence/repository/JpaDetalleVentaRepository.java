@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JpaDetalleVentaRepository extends JpaRepository<DetalleVentaEntity, Integer> {
+    boolean existsByProductoIteAlmId(Integer iteAlmId);
 }

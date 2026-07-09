@@ -12,12 +12,14 @@ public class ProveedorEntity {
 
     private String nombre;
     private String descripcion;
+    @Column(unique = true)
     private String razonSocial;
 
     @ManyToOne
     @JoinColumn(name = "id_tipo_documento")
     private TipoDocumentoIdentidadEntity tipoDocumentoIdentidad;
 
+    @Column(unique = true)
     private String numeroDocumento;
     private String direccion;
     private String celular;

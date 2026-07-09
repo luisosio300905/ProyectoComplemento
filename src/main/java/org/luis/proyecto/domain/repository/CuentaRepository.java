@@ -10,6 +10,7 @@ public interface CuentaRepository {
     Optional<Cuenta> findById(String id);
     void deleteById(String id);
     List<Cuenta> findAll();
+    List<Cuenta> findAllWithChildren();
     boolean existsById(String id);
 }
 

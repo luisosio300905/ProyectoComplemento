@@ -10,7 +10,7 @@ public class FamiliaProductoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FamId")
     private Integer id;
-    @Column(name = "FamDescripcion")
+    @Column(name = "FamDescripcion", unique = true)
     private String famDescripcion;
     @Column(name = "FamEstado")
     private Boolean famEstado;

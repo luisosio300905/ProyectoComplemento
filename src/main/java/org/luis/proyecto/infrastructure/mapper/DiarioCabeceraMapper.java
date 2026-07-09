@@ -7,11 +7,19 @@ import org.luis.proyecto.infrastructure.rest.response.DiarioCabeceraResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class DiarioCabeceraMapper {
 
+    private final DiarioDetalleMapper diarioDetalleMapper;
+
+    public DiarioCabeceraMapper(DiarioDetalleMapper diarioDetalleMapper) {
+        this.diarioDetalleMapper = diarioDetalleMapper;
+    }
+
     public DiarioCabecera toDiarioCabecera(DiarioCabeceraEntity diarioCabeceraEntity) {
+        if (diarioCabeceraEntity == null) return null;
         DiarioCabecera diarioCabecera = new DiarioCabecera();
         diarioCabecera.setDiaCabCompId(diarioCabeceraEntity.getDiaCabCompId());
         diarioCabecera.setDiaCabAno(diarioCabeceraEntity.getDiaCabAno());
@@ -26,10 +34,20 @@ public class DiarioCabeceraMapper {
         diarioCabecera.setUsrSistema(diarioCabeceraEntity.getUsrSistema());
         diarioCabecera.setFecSistema(diarioCabeceraEntity.getFecSistema());
         diarioCabecera.setHrsSistema(diarioCabeceraEntity.getHrsSistema());
+        if (diarioCabeceraEntity.getDetalles() != null) {
+            try {
+                diarioCabecera.setDetalles(diarioCabeceraEntity.getDetalles().stream()
+                        .map(diarioDetalleMapper::toDiarioDetalle)
+                        .collect(Collectors.toList()));
+            } catch (Exception e) {
+                // Ignore lazy initialization issues
+            }
+        }
         return diarioCabecera;
     }
 
     public DiarioCabeceraEntity toDiarioCabeceraEntity(DiarioCabecera diarioCabecera) {
+        if (diarioCabecera == null) return null;
         DiarioCabeceraEntity diarioCabeceraEntity = new DiarioCabeceraEntity();
         if (diarioCabecera.getDiaCabCompId() != null) {
             diarioCabeceraEntity.setDiaCabCompId(diarioCabecera.getDiaCabCompId());
@@ -46,6 +64,12 @@ public class DiarioCabeceraMapper {
         diarioCabeceraEntity.setUsrSistema(diarioCabecera.getUsrSistema());
         diarioCabeceraEntity.setFecSistema(diarioCabecera.getFecSistema());
         diarioCabeceraEntity.setHrsSistema(diarioCabecera.getHrsSistema());
+        if (diarioCabecera.getDetalles() != null) {
+            diarioCabeceraEntity.setDetalles(diarioCabecera.getDetalles().stream()
+                    .map(diarioDetalleMapper::toDiarioDetalleEntity)
+                    .collect(Collectors.toList()));
+            diarioCabeceraEntity.getDetalles().forEach(d -> d.setDiarioCabecera(diarioCabeceraEntity));
+        }
         return diarioCabeceraEntity;
     }
 

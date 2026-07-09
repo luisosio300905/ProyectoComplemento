@@ -10,7 +10,7 @@ public class MonedaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MonedaId")
     private Integer id;
-    @Column(name = "MonedaDescripcion")
+    @Column(name = "MonedaDescripcion", unique = true)
     private String monedaDescripcion;
     @Column(name = "MonedaAbrev")
     private String monedaAbrev;

@@ -10,4 +10,5 @@ public interface DetalleVentaRepository {
     void deleteById(Integer id);
     Optional<DetalleVenta> findById(Integer id);
     List<DetalleVenta> findAll();
+    boolean existsByProductoId(Integer iteAlmId);
 }

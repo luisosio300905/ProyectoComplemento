@@ -3,34 +3,36 @@ package org.luis.proyecto.application.service.mapeocuentas.impl;
 import org.luis.proyecto.application.service.mapeocuentas.MapeoVentaCuentasService;
 import org.luis.proyecto.domain.model.DiarioDetalle;
 import org.luis.proyecto.domain.model.Venta;
+import org.luis.proyecto.domain.model.DetalleVenta;
+import org.luis.proyecto.domain.model.Producto;
+import org.luis.proyecto.domain.repository.ProductoRepository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Map;
+import java.util.HashMap;
 
-/**
- * Plan contable general empresarial (PCGE) – Perú.
- * Asiento típico de venta gravada con IGV (18%):
- * <ul>
- *   <li>DEBE  12.1212 – Facturas por cobrar (total con IGV)</li>
- *   <li>HABER 70.7011 – Ventas de mercaderías (base imponible)</li>
- *   <li>HABER 40.4011 – IGV – Cuenta propia</li>
- * </ul>
- */
 public class MapeoVentaCuentasServiceImpl implements MapeoVentaCuentasService {
 
     private static final BigDecimal TASA_IGV = new BigDecimal("0.18");
     private static final BigDecimal FACTOR_IGV = new BigDecimal("1.18");
 
-    // Elementos PCGE
     private static final String CUENTA_CXC = "12";
     private static final String SUB_CXC_FACTURAS = "1212";
     private static final String CUENTA_VENTAS = "70";
     private static final String SUB_VENTAS_MERCADERIAS = "7011";
     private static final String CUENTA_TRIBUTOS = "40";
     private static final String SUB_IGV = "4011";
+
+    private final ProductoRepository productoRepository;
+
+    public MapeoVentaCuentasServiceImpl(ProductoRepository productoRepository) {
+        this.productoRepository = productoRepository;
+    }
 
     @Override
     public List<DiarioDetalle> construirAsientoVenta(Venta venta, String usuario) {
@@ -44,7 +46,6 @@ public class MapeoVentaCuentasServiceImpl implements MapeoVentaCuentasService {
 
         List<DiarioDetalle> lineas = new ArrayList<>();
 
-        // DEBE: Cuentas por cobrar (total con IGV)
         lineas.add(crearLinea(
                 total, BigDecimal.ZERO,
                 CUENTA_CXC, SUB_CXC_FACTURAS, null, null,
@@ -52,7 +53,6 @@ public class MapeoVentaCuentasServiceImpl implements MapeoVentaCuentasService {
                 numComprobante, monedaId, usr
         ));
 
-        // HABER: Ventas (base imponible)
         if (baseImponible.compareTo(BigDecimal.ZERO) > 0) {
             lineas.add(crearLinea(
                     BigDecimal.ZERO, baseImponible,
@@ -70,6 +70,53 @@ public class MapeoVentaCuentasServiceImpl implements MapeoVentaCuentasService {
                     "Haber - IGV venta " + numComprobante,
                     numComprobante, monedaId, usr
             ));
+        }
+
+
+        if (venta.getDetallesVenta() != null) {
+            Map<String, BigDecimal> costoPorCuentaExistencia = new HashMap<>();
+            
+            for (DetalleVenta det : venta.getDetallesVenta()) {
+                if (det.getIteAlmId() != null) {
+                    Optional<Producto> optProd = productoRepository.findById(det.getIteAlmId());
+                    if (optProd.isPresent()) {
+                        Producto prod = optProd.get();
+                        BigDecimal costoProd = prod.getIteAlmCosPro() != null ? prod.getIteAlmCosPro() : BigDecimal.ZERO;
+                        BigDecimal cant = det.getVtaDetCantidad() != null ? det.getVtaDetCantidad() : BigDecimal.ONE;
+                        BigDecimal lineCosto = costoProd.multiply(cant).setScale(2, RoundingMode.HALF_UP);
+
+                        String ctaExist = prod.getIteAlmCtaExist() != null ? prod.getIteAlmCtaExist() : "2011";
+                        costoPorCuentaExistencia.put(
+                            ctaExist,
+                            costoPorCuentaExistencia.getOrDefault(ctaExist, BigDecimal.ZERO).add(lineCosto)
+                        );
+                    } else {
+                    }
+                } else {
+                }
+            }
+            
+            for (Map.Entry<String, BigDecimal> entry : costoPorCuentaExistencia.entrySet()) {
+                BigDecimal totalCostoLinea = entry.getValue();
+                if (totalCostoLinea.compareTo(BigDecimal.ZERO) > 0) {
+                    String ctaExist = entry.getKey();
+                    
+                    lineas.add(crearLinea(
+                            totalCostoLinea, BigDecimal.ZERO,
+                            "69", "6911", null, null,
+                            "Debe - Costo de Ventas " + numComprobante,
+                            numComprobante, monedaId, usr
+                    ));
+                    
+                    String cuentaIdExist = ctaExist.length() >= 2 ? ctaExist.substring(0, 2) : "20";
+                    lineas.add(crearLinea(
+                            BigDecimal.ZERO, totalCostoLinea,
+                            cuentaIdExist, ctaExist, null, null,
+                            "Haber - Salida Mercadería " + numComprobante,
+                            numComprobante, monedaId, usr
+                    ));
+                }
+            }
         }
 
         return lineas;

@@ -18,8 +18,6 @@ public class CrearVentaUseCaseImpl implements CrearVentaUseCase {
     private final CrearDiarioDetalleUseCase crearDiarioDetalleUseCase;
     private final MapeoVentaCuentasService mapeoVentaCuentasService;
 
-    private static final ThreadLocal<Long> ultimaDiaCabCompId = new ThreadLocal<>();
-
     public CrearVentaUseCaseImpl(VentaRepository ventaRepository,
                                  CrearDiarioCabeceraUseCase crearDiarioCabeceraUseCase,
                                  CrearDiarioDetalleUseCase crearDiarioDetalleUseCase,
@@ -28,14 +26,6 @@ public class CrearVentaUseCaseImpl implements CrearVentaUseCase {
         this.crearDiarioCabeceraUseCase = crearDiarioCabeceraUseCase;
         this.crearDiarioDetalleUseCase = crearDiarioDetalleUseCase;
         this.mapeoVentaCuentasService = mapeoVentaCuentasService;
-    }
-
-    public static Long obtenerUltimaDiaCabCompId() {
-        return ultimaDiaCabCompId.get();
-    }
-
-    public static void limpiarUltimaDiaCabCompId() {
-        ultimaDiaCabCompId.remove();
     }
 
     @Override
@@ -56,7 +46,6 @@ public class CrearVentaUseCaseImpl implements CrearVentaUseCase {
         cab.setFecSistema(LocalDateTime.now());
 
         DiarioCabecera cabCreada = crearDiarioCabeceraUseCase.crear(cab);
-        ultimaDiaCabCompId.set(cabCreada.getDiaCabCompId());
 
         String usuario = ventaGuardada.getUsrSistema() != null ? ventaGuardada.getUsrSistema() : "SISTEMA";
         List<DiarioDetalle> lineas = mapeoVentaCuentasService.construirAsientoVenta(ventaGuardada, usuario);
@@ -66,6 +55,7 @@ public class CrearVentaUseCaseImpl implements CrearVentaUseCase {
             crearDiarioDetalleUseCase.crear(linea);
         }
 
+        ventaGuardada.setDiaCabCompId(cabCreada.getDiaCabCompId());
         return ventaGuardada;
     }
 }

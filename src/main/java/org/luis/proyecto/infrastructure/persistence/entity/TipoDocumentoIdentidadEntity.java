@@ -11,7 +11,7 @@ public class TipoDocumentoIdentidadEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_tipo_documento")
     private Integer id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nombre;
     @OneToMany(mappedBy = "tipoDocumentoIdentidad")
     private List<ClienteEntity> clientes;

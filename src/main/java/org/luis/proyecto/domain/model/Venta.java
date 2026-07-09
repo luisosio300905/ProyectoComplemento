@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 public class Venta {
     private Integer id;
+    private Long diaCabCompId;
     private List<DetalleVenta> detallesVenta;
     private String empresaId;
     private Integer unidComId;
@@ -107,4 +108,6 @@ public class Venta {
     public void setVtaCabDsctoGlobal(BigDecimal vtaCabDsctoGlobal) { this.vtaCabDsctoGlobal = vtaCabDsctoGlobal; }
     public LocalDateTime getVtaCabFechaVcto() { return vtaCabFechaVcto; }
     public void setVtaCabFechaVcto(LocalDateTime vtaCabFechaVcto) { this.vtaCabFechaVcto = vtaCabFechaVcto; }
+    public Long getDiaCabCompId() { return diaCabCompId; }
+    public void setDiaCabCompId(Long diaCabCompId) { this.diaCabCompId = diaCabCompId; }
 }

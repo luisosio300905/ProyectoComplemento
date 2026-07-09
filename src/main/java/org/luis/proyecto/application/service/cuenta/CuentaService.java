@@ -1,6 +1,7 @@
 package org.luis.proyecto.application.service.cuenta;
 
 import org.luis.proyecto.domain.model.Cuenta;
+import org.luis.proyecto.infrastructure.rest.response.CuentaJerarquiaResponse;
 import java.util.List;
 
 public interface CuentaService {
@@ -9,5 +10,7 @@ public interface CuentaService {
     void eliminar(String id);
     Cuenta obtenerById(String id);
     List<Cuenta> obtenerTodos();
+    List<CuentaJerarquiaResponse> obtenerJerarquia();
 }
+
 

@@ -4,6 +4,7 @@ import org.luis.proyecto.application.service.cuenta.CuentaService;
 import org.luis.proyecto.infrastructure.mapper.CuentaMapper;
 import org.luis.proyecto.infrastructure.rest.request.CuentaRequest;
 import org.luis.proyecto.infrastructure.rest.response.CuentaResponse;
+import org.luis.proyecto.infrastructure.rest.response.CuentaJerarquiaResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,11 @@ public class CuentaController {
     @GetMapping
     public ResponseEntity<List<CuentaResponse>> obtenerTodos() {
         return ResponseEntity.ok(cuentaMapper.toCuentaResponseList(cuentaService.obtenerTodos()));
+    }
+
+    @GetMapping("/jerarquia")
+    public ResponseEntity<List<CuentaJerarquiaResponse>> obtenerJerarquia() {
+        return ResponseEntity.ok(cuentaService.obtenerJerarquia());
     }
 
     @PostMapping

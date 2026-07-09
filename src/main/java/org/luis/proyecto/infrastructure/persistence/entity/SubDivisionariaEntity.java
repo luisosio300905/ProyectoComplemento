@@ -12,11 +12,11 @@ public class SubDivisionariaEntity {
     private String cuentaId;
 
     @Id
-    @Column(name = "SubCtaId")
+    @Column(name = "DivisioId")
     private String subCtaId;
 
     @Id
-    @Column(name = "DivisioId")
+    @Column(name = "SubCtaId")
     private String divisioId;
 
     @Id
@@ -61,9 +61,9 @@ public class SubDivisionariaEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
-        @JoinColumn(name = "CuentaId", insertable = false, updatable = false),
-        @JoinColumn(name = "SubCtaId", insertable = false, updatable = false),
-        @JoinColumn(name = "DivisioId", insertable = false, updatable = false)
+        @JoinColumn(name = "CuentaId", referencedColumnName = "CuentaId", insertable = false, updatable = false),
+        @JoinColumn(name = "SubCtaId", referencedColumnName = "DivisioId", insertable = false, updatable = false),
+        @JoinColumn(name = "DivisioId", referencedColumnName = "SubCtaId", insertable = false, updatable = false)
     })
     private DivisionariaEntity divisionaria;
 

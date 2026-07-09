@@ -25,25 +25,26 @@ public class BalanceGeneralServiceImpl implements BalanceGeneralService {
 
     @Override
     public BalanceGeneralResponse obtenerBalance(Long diaCabCompId) {
-        // Obtener cabecera con detalles
+        // Obtener cabecera
         DiarioCabecera cabecera = obtenerBalanceGeneralUseCase.obtenerConDetalles(diaCabCompId);
 
         if (cabecera == null) {
             return null;
         }
 
+        // Consultar los detalles directamente desde el repositorio para evitar problemas de caché de Hibernate
+        List<DiarioDetalle> detalles = diarioDetalleRepository.findByDiaCabCompId(diaCabCompId);
+
         // Calcular totales de debe y haber
         BigDecimal totalDebe = BigDecimal.ZERO;
         BigDecimal totalHaber = BigDecimal.ZERO;
 
-        if (cabecera.getDetalles() != null) {
-            for (DiarioDetalle detalle : cabecera.getDetalles()) {
-                if (detalle.getDiaDetDebe() != null) {
-                    totalDebe = totalDebe.add(detalle.getDiaDetDebe());
-                }
-                if (detalle.getDiaDetHaber() != null) {
-                    totalHaber = totalHaber.add(detalle.getDiaDetHaber());
-                }
+        for (DiarioDetalle detalle : detalles) {
+            if (detalle.getDiaDetDebe() != null) {
+                totalDebe = totalDebe.add(detalle.getDiaDetDebe());
+            }
+            if (detalle.getDiaDetHaber() != null) {
+                totalHaber = totalHaber.add(detalle.getDiaDetHaber());
             }
         }
 
@@ -53,7 +54,7 @@ public class BalanceGeneralServiceImpl implements BalanceGeneralService {
             cabecera.getDiaCabGlosa(),
             totalDebe,
             totalHaber,
-            cabecera.getDetalles() != null ? cabecera.getDetalles().size() : 0
+            detalles.size()
         );
     }
 

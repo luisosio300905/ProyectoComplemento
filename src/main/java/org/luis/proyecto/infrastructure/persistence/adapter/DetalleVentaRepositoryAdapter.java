@@ -39,4 +39,9 @@ public class DetalleVentaRepositoryAdapter implements DetalleVentaRepository {
     public List<DetalleVenta> findAll() {
         return detalleVentaMapper.toDetalleVentaList(jpaDetalleVentaRepository.findAll());
     }
+
+    @Override
+    public boolean existsByProductoId(Integer iteAlmId) {
+        return jpaDetalleVentaRepository.existsByProductoIteAlmId(iteAlmId);
+    }
 }

@@ -76,7 +76,7 @@ public class ProductoEntity {
     private BigDecimal iteAlmValorVtaFar;
     @Column(name = "IteAlmFecVen")
     private LocalDateTime iteAlmFecVen;
-    @Column(name = "codpro")
+    @Column(name = "codpro", unique = true)
     private String codpro;
     @Column(name = "ItemAlmCtrlAdm")
     private Boolean itemAlmCtrlAdm;

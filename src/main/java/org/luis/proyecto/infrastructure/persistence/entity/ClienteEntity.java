@@ -13,7 +13,7 @@ public class ClienteEntity {
     @Column(name = "ClienDescripcion")
     private String clienDescripcion;
 
-    @Column(name = "ClienRazSoc")
+    @Column(name = "ClienRazSoc", unique = true)
     private String clienRazSoc;
 
     @Column(name = "ClienNomCor")
@@ -26,7 +26,7 @@ public class ClienteEntity {
     @JoinColumn(name = "TipDocIdenId")
     private TipoDocumentoIdentidadEntity tipoDocumentoIdentidad;
 
-    @Column(name = "ClienDoc")
+    @Column(name = "ClienDoc", unique = true)
     private String clienDoc;
 
     @Column(name = "ClienRegCom")
